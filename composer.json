@@ -1,0 +1,17 @@
+{
+	"name" : "Third Party API",
+	"version" : "0.1",
+	"description" : "Developer House App that generates Discover queries based on popular input",
+	"license" : "",
+	"repositories" : [{
+			"type" : "git",
+			"url" : "https://github.com/OCLC-Developer-Network/worldcat-discovery-php.git"
+		}, {
+			"type" : "git",
+			"url" : "https://github.com/OCLC-Developer-Network/oclc-auth-php.git"
+		}
+	],
+	"require": {
+		"rogeriopradoj/codeigniter": "2.2.0"
+	}
+}
