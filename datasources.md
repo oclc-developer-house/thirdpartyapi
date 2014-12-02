@@ -5,3 +5,5 @@ Data Sources
 * [BBC](http://bbc.co.uk)
 * [Bookvibe](http://bookvibe.com)
 * [Maria Popova](http://brainpickings.com)
+* [DBBedia OWL](http://dbpedia.org)
+
