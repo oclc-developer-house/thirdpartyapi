@@ -20,9 +20,9 @@ LIMIT 20
 ## Find Events associated with a particular date
 
 ```
-SELECT ?Location WHERE {
- ?Location a dbpedia-owl:Event .
- ?Location dbpedia-owl:date ?date.
+SELECT ?event WHERE {
+ ?event a dbpedia-owl:Event .
+ ?event dbpedia-owl:date ?date.
 FILTER( 
     ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) && 
     ( ?date <= "2014-12-02"^^xsd:dateTime ) && 
