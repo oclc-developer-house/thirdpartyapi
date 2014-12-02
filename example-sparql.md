@@ -17,7 +17,7 @@ SELECT DISTINCT ?person ?date  WHERE {
 LIMIT 20
 ```
 
-## Find Events associated with a particular dat
+## Find Events associated with a particular date
 
 ```
 SELECT ?Location WHERE {
