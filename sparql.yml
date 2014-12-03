@@ -21,6 +21,25 @@ queries:
               ) 
             }
             LIMIT 20
+        name: "Atheletes"
+        description:
+        discovery_map:
+            - name: "name" 
+            - creator: "person"
+            - about: "person"
+        namespaces:
+            - ont: "http://dbpedia.org/ontology/"
+        query: |
+            SELECT DISTINCT ?person ?date  WHERE { 
+              ?person ont:birthDate ?date .
+              ?person a dbpedia-owl:Athlete 
+              FILTER( 
+                ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) && 
+                ( ?date <= "2014-12-02"^^xsd:dateTime ) && 
+                ( regex(str(?date), "[0-9]{4}-12-02") ) 
+              ) 
+            }
+            LIMIT 20
     - query: |
         SELECT ?Location WHERE {
          ?Location a dbpedia-owl:Event .
