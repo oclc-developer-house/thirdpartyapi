@@ -1,15 +1,15 @@
 # Example DBPedia SPARQL 
 
-## Find properties of Field
+## Exploring properties of unknown
 
 ```
+
 PREFIX dbp: <http://dbpedia.org/ontology/>
 
-SELECT DISTINCT ?mediaType
+SELECT DISTINCT ?type 
 WHERE {
-  ?book ?predicate ?object;
-  dbpedia2:mediaType ?mediaType;
-    rdf:type dbp:Work
+    ?s rdf:type ?type
+    FILTER regex(str(?type), 'http://dbpedia.org/ontology')
 }
 LIMIT 100
 ```
