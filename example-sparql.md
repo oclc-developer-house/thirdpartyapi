@@ -1,5 +1,19 @@
 # Example DBPedia SPARQL 
 
+## Find properties of Field
+
+```
+PREFIX dbp: <http://dbpedia.org/ontology/>
+
+SELECT DISTINCT ?mediaType
+WHERE {
+  ?book ?predicate ?object;
+  dbpedia2:mediaType ?mediaType;
+    rdf:type dbp:Work
+}
+LIMIT 100
+```
+
 ## Find Authors born on a particular day
 
 ```
