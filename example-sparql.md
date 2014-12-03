@@ -45,3 +45,19 @@ FILTER(
  }
 LIMIT 10
 ```
+
+
+## Find Countries founded on a particular date
+
+```
+PREFIX yago: <http://dbpedia.org/class/yago/>
+SELECT * WHERE {
+ ?Country a dbpedia-owl:Country.
+ ?Country a yago:Country108544813.
+ ?Country dbpedia-owl:foundingDate ?date.
+FILTER( 
+    ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) && 
+    ( regex(str(?date), "[0-9]{4}-12-02") ) 
+  )
+ }
+```
