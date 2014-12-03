@@ -21,7 +21,7 @@ queries:
               ) 
             }
             LIMIT 20
-        name: "Atheletes"
+        name: "Athletes"
         description:
         discovery_map:
             - name: "name" 
@@ -59,7 +59,7 @@ queries:
               ) 
             }
             LIMIT 20
-        name: "Muscians"
+        name: "Musicians"
         description:
         discovery_map:
             - name: "name" 
