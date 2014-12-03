@@ -61,3 +61,18 @@ FILTER(
   )
  }
 ```
+
+
+## Find Holidays on a particular date
+
+```
+PREFIX dbpprop: <http://dbpedia.org/property/>
+SELECT * WHERE {
+ ?Holiday a dbpedia-owl:Holiday .
+ ?Holiday dbpprop:date ?date.
+FILTER( 
+    ( regex(str(?date), "12-01") ) 
+  )
+ }
+```
+
