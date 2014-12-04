@@ -29,7 +29,11 @@ class DBPedia extends CI_Model {
 			$entity->set_id($uri);
 			$entity->set_terms($props['name']);
 			$entity->set_dapi_map($this->sparql_config['discovery_map']);
-			$entity->set_label($this->sparql_config['name']);
+
+			$description = $this->sparql_config['description'];
+			$description = str_replace('%NAME%', $props['name'][0], $description);
+			$description = str_replace('%DATE%', date('F j, Y', strtotime($props['date'])), $description);
+			$entity->set_label($description);
 			$entities[] = $entity;
 		}
 		return $entities;
