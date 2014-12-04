@@ -106,8 +106,8 @@ WHERE
         rdfs:label ?name .
     FILTER( 
         ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
-        ( str(?date) <= "2014-12-02" ) && 
-        ( regex(str(?date), "[0-9]{4}-12-02") ) && 
+        ( str(?date) <= "%TODAY%" ) && 
+        ( regex(str(?date), "[0-9]{4}-%MONTH%-%DAY%") ) && 
         (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
      )
 }
