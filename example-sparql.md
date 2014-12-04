@@ -39,7 +39,7 @@ SELECT ?event WHERE {
  ?event dbpedia-owl:date ?date.
 FILTER( 
     ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) && 
-    ( ?date <= "2014-12-02"^^xsd:dateTime ) && 
+          ( str(?date) <= "2014-12-02" ) && 
     ( regex(str(?date), "[0-9]{4}-12-02") ) 
   )
  }
@@ -57,6 +57,7 @@ SELECT * WHERE {
  ?Country dbpedia-owl:foundingDate ?date.
 FILTER( 
     ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) && 
+            ( str(?date) <= "2014-12-02" ) && 
     ( regex(str(?date), "[0-9]{4}-12-02") ) 
   )
  }
@@ -76,3 +77,57 @@ FILTER(
  }
 ```
 
+## Find all the properties of a book
+
+```
+PREFIX ont: <http://dbpedia.org/ontology/>
+PREFIX prop: <http://dbpedia.org/property/>
+
+SELECT DISTINCT ?prop
+WHERE 
+{
+?s ?prop ?o;
+     rdf:type ont:Book
+     FILTER regex (str(?prop), 'http://dbpedia.org/property/')
+
+} 
+ORDER BY ?prop
+```
+## Find books published on a particular day
+
+```
+PREFIX ont: <http://dbpedia.org/ontology/> 
+
+SELECT DISTINCT ?book ?name ?date
+WHERE
+{ 
+    ?book a ont:Book;
+        ont:publicationDate ?date;
+        rdfs:label ?name .
+    FILTER( 
+        ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
+        ( str(?date) <= "%TODAY%" ) && 
+        ( regex(str(?date), "[0-9]{4}-%MONTH%-%DAY%") ) && 
+        (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
+     )
+}
+LIMIT 50
+```
+
+## Find organizations founded on a particular day (excludes educational institutions)
+
+```
+PREFIX yago: <http://dbpedia.org/class/yago/>
+SELECT * WHERE {
+ ?Org a yago:Organization108008335.
+ ?Org dbpprop:established ?date.
+
+FILTER NOT EXISTS {?Org a dbpedia-owl:EducationalInstitution.}
+
+FILTER( 
+    ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) && 
+            ( str(?date) <= "2014-12-02" ) && 
+    ( regex(str(?date), "[0-9]{4}-12-02") ) 
+  )
+ }
+```

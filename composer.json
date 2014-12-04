@@ -15,6 +15,7 @@
 		"rogeriopradoj/codeigniter": "2.2.0",
 		"easyrdf/easyrdf": "0.9.0",
 		"ml/json-ld": "1.0.3",
-		"worldcat/discovery" : ">=0.7"
+		"worldcat/discovery" : ">=0.7",
+		"guzzlehttp/guzzle": "5.0",
 	}
 }
