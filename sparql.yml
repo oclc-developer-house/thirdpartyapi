@@ -5,91 +5,99 @@ queries:
     -   name: "Name of Query"
         description:
         discovery_map:
-            - name: "name" 
+            - name: "name"
             - creator: "person"
             - about: "person"
         namespaces:
             - ont: "http://dbpedia.org/ontology/"
         query: |
-            SELECT DISTINCT ?person ?date  WHERE { 
+            SELECT DISTINCT ?person ?date  WHERE {
               ?person ont:birthDate ?date .
               ?person a dbpedia-owl:Writer .
               ?person prop:name ?name
-              FILTER( 
-                ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) && 
-                ( ?date <= "2014-12-02"^^xsd:dateTime ) && 
-                ( regex(str(?date), "[0-9]{4}-12-02") ) 
-              ) 
+              FILTER(
+                ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
+                ( ?date <= "2014-12-02"^^xsd:dateTime ) &&
+                ( regex(str(?date), "[0-9]{4}-12-02") )
+              )
             }
             LIMIT 50
+
         name: "Athletes"
         description:
         discovery_map:
-            - name: "name" 
+            - name: "name"
             - creator: "person"
             - about: "person"
         namespaces:
             - ont: "http://dbpedia.org/ontology/"
         query: |
-            SELECT DISTINCT ?person ?date  WHERE { 
+            SELECT DISTINCT ?person ?date  WHERE {
               ?person ont:birthDate ?date .
               ?person a dbpedia-owl:Athlete .
               ?person prop:name ?name
-              FILTER( 
-                ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) && 
-                ( ?date <= "2014-12-02"^^xsd:dateTime ) && 
-                ( regex(str(?date), "[0-9]{4}-12-02") ) 
-              ) 
+              FILTER(
+                ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
+                ( ?date <= "2014-12-02"^^xsd:dateTime ) &&
+                ( regex(str(?date), "[0-9]{4}-12-02") )
+              )
             }
             LIMIT 50
+
         name: "Politicians"
         description:
         discovery_map:
-            - name: "name" 
+            - name: "name"
             - creator: "person"
             - about: "person"
         namespaces:
             - ont: "http://dbpedia.org/ontology/"
         query: |
-            SELECT DISTINCT ?person ?date  WHERE { 
+            SELECT DISTINCT ?person ?date  WHERE {
               ?person ont:birthDate ?date .
               ?person a dbpedia-owl:Politician .
               ?person prop:name ?name
-              FILTER( 
-                ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) && 
-                ( ?date <= "2014-12-02"^^xsd:dateTime ) && 
-                ( regex(str(?date), "[0-9]{4}-12-02") ) 
-              ) 
+              FILTER(
+                ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
+                ( ?date <= "2014-12-02"^^xsd:dateTime ) &&
+                ( regex(str(?date), "[0-9]{4}-12-02") )
+              )
             }
             LIMIT 50
+
         name: "Musicians"
         description:
         discovery_map:
-            - name: "name" 
+            - name: "name"
             - creator: "person"
             - about: "person"
         namespaces:
             - ont: "http://dbpedia.org/ontology/"
         query: |
-            SELECT DISTINCT ?person ?date  WHERE { 
+            SELECT DISTINCT ?person ?date  WHERE {
               ?person ont:birthDate ?date .
               ?person a dbpedia-owl:MusicalArtist .
               ?person prop:name ?name
-              FILTER( 
-                ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) && 
-                ( ?date <= "2014-12-02"^^xsd:dateTime ) && 
-                ( regex(str(?date), "[0-9]{4}-12-02") ) 
-              ) 
+              FILTER(
+                ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
+                ( ?date <= "2014-12-02"^^xsd:dateTime ) &&
+                ( regex(str(?date), "[0-9]{4}-12-02") )
+              )
             }
             LIMIT 50
-    - query: |
-        SELECT ?Location WHERE {
-         ?Location a dbpedia-owl:Event .
-         ?Location dbpedia-owl:date ?date.
-        FILTER( 
-            ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) && 
-            ( ?date <= "2014-12-02"^^xsd:dateTime ) && 
-            ( regex(str(?date), "[0-9]{4}-12-02") ) 
-          )
-         }
-        LIMIT 10
+
+        name: "Countries"
+                description:
+                discovery_map:
+                    - name: "country"
+                namespaces:
+                    - ont: "http://dbpedia.org/ontology/"
+                query: |
+                    SELECT * WHERE {
+                        ?Country a dbpedia-owl:Country.
+                        ?Country dbpedia-owl:foundingDate ?date.
+                        FILTER(
+                            ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
+                            ( regex(str(?date), "[0-9]{4}-12-05") )
+                        )
+                    }
