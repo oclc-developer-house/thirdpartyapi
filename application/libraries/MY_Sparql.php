@@ -23,9 +23,6 @@ class MY_Sparql {
 
 	public function query($query = "") {
 		
-
-		//$this->rest->initialize($restconfig);
-
 		$results = $this->rest->get('sparql',
 			array('default-graph-uri' => 'http://dbpedia.org',
 					'query' => $query,

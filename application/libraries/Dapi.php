@@ -20,10 +20,18 @@ class Dapi {
 	}	
 	
 
-	public function get_bib() {
-		$bib = Bib::Find(7977212, $this->accessToken);
+	public function search($query = "") {
+		$results = Bib::Search($query, $this->accessToken);
 
-		yell($bib);
+		if (is_a($results, "WordlCat\Discovery\Error")) {
+			echo $results->getErrorCode();
+			echo $results->getErrorMessage();
+		}else {
+			//yell($results->getSearchResults());
+			return $results->getSearchResults();
+		}
+		
+
 	}
 
 }
