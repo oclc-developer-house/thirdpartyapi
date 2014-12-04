@@ -6,7 +6,6 @@ queries:
         discovery_map:
             - name
             - creator
-            - about
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
             SELECT DISTINCT ?entity ?date ?name
@@ -27,7 +26,6 @@ queries:
         discovery_map:
             - name
             - creator
-            - about
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
             SELECT DISTINCT ?entity ?name ?date
@@ -47,7 +45,6 @@ queries:
         discovery_map:
             - name
             - creator
-            - about
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
             SELECT DISTINCT ?entity ?name ?date  WHERE {
@@ -66,7 +63,6 @@ queries:
         discovery_map:
             - name
             - creator
-            - about
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
             SELECT DISTINCT ?entity ?name ?date  WHERE {
@@ -103,7 +99,6 @@ queries:
         discovery_map:
             - name
             - uniformName
-            - about
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
             SELECT DISTINCT ?entity ?name ?date WHERE {
@@ -123,7 +118,6 @@ queries:
         discovery_map:
             - name
             - uniformName
-            - about
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/> 
             SELECT DISTINCT ?entity ?name ?date WHERE {
