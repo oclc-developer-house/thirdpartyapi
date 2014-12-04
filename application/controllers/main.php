@@ -69,7 +69,7 @@ class Main extends CI_Controller {
 
 	public function json() {
 	
-		$this->output->set_content_type("application/json");
+		//$this->output->set_content_type("application/json");
 		// step 1 : get dbpedia results
 		$dbpedia_results = $this->get_dbpedia_results();
 
@@ -79,11 +79,9 @@ class Main extends CI_Controller {
 		// step 3 : normalize counts for each entity
 
 		// step 4 : get dapi results for each entity
-		$dapi = new Dapi();
+		$entities = $this->get_dapi_data($entities);
 
 		//$dapi_results = $dapi->search("name:john+smith+or+name:smith+john");
-
-		print_r($dbpedia_results);
 		
 	}
 
@@ -134,29 +132,65 @@ class Main extends CI_Controller {
 	    return $entities;
 	}
 
-	public function debug() {
-		$dbpedia_results = $this->get_dbpedia_results();
+	protected function get_dapi_data(&$entities) {
 
 		$dapi = new Dapi();
 
-		foreach($dbpedia_results as $dbp_result) {
-			foreach($dbp_result as $dbpkey => $dbpvalue) {
+		$result_count = array();
 
-				$terms = $dbpvalue['name'];
-				array_walk($terms, function(&$value, $key) {
-						$value = "name:" . $value;
-					});
+		foreach($entities as &$entity) {
+			//yell($entity);
 
-				$dapi_query = implode(" OR ", $terms);
+			$dapi_query_array = array();
 
-				$dapi_results = $dapi->search($dapi_query);
-
-				echo $dapi_query . "<br/>";
-				echo count($dapi_results);
-				yell($dapi_results);
-				//break;
+			foreach($entity->get_dapi_map() as $param) {
+				foreach($entity->get_terms() as $term) {
+					array_push($dapi_query_array, "$param:$term");
+				}
 			}
+
+			$dapi_query = implode(" OR ", $dapi_query_array);
+
+			yell($dapi_query);
+			$dapi_response = $dapi->search($dapi_query);
+			$dapi_results = $dapi_response->getSearchResults();
+
+			$dapi_total_count = $dapi_response->getTotalResults();
+			$result_count[] = $dapi_total_count;
+
+			echo count($dapi_results);
+			//yell($dapi_results);
+
+			foreach($dapi_results as $dapi_result) {
+				yell($dapi_result->getName()->getValue());
+				yell($dapi_result->getAuthor()->getValue());
+			}
+
+			break;
+
+			$rank_map = $entity->get_rank_map();
+			$rank_map['dapi_count'] = $dapi_total_count;
+			$entity->set_rank_map($rank_map);
+
+			// set holdings
+
+			//yell($entity);
 		}
+
+		// now, enter normalized count values into each entity
+		$count_max = max($result_count);
+		$count_min = min($result_count);		
+
+		foreach ($entities as &$entity) {
+			$rank_map = $entity->get_rank_map();
+			$rank_map['normalized_dapi_count'] = 
+				($rank_map['dapi_count'] - $count_min) / ($count_max - $count_min);
+			$entity->set_rank_map($rank_map);
+
+			yell($entity);
+		}
+
+		return $entities;
 	}
 
 	public function test_data() {
