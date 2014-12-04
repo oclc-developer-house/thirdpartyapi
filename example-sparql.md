@@ -92,3 +92,20 @@ WHERE
 } 
 ORDER BY ?prop
 ```
+
+## Find organizations founded on a particular day (excludes educational institutions)
+
+```
+PREFIX yago: <http://dbpedia.org/class/yago/>
+SELECT * WHERE {
+ ?Org a yago:Organization108008335.
+ ?Org dbpprop:established ?date.
+
+FILTER NOT EXISTS {?Org a dbpedia-owl:EducationalInstitution.}
+
+FILTER( 
+    ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) && 
+    ( regex(str(?date), "[0-9]{4}-12-02") ) 
+  )
+ }
+```
