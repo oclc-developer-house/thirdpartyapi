@@ -76,3 +76,18 @@ FILTER(
  }
 ```
 
+## Find all the properties of a book
+...
+PREFIX ont: <http://dbpedia.org/ontology/>
+PREFIX prop: <http://dbpedia.org/property/>
+
+SELECT DISTINCT ?prop
+WHERE 
+{
+?s ?prop ?o;
+     rdf:type ont:Book
+     FILTER regex (str(?prop), 'http://dbpedia.org/property/')
+
+} 
+ORDER BY ?prop
+...
