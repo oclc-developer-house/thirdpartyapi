@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+include_once APPPATH . 'models/entity.php';
+
 class Main extends CI_Controller {
 
 	/**
@@ -21,7 +23,7 @@ class Main extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 
-		$this->load->Model('Sparql');
+		$this->load->Model('DBPedia');
 
 		$this->load->helper('form');
 		$this->load->helper('dev');
@@ -34,33 +36,48 @@ class Main extends CI_Controller {
 		$this->load->view('main');
 	}
 
-	public function json() {
-		$welcome = new stdClass();
-		$welcome->message = "hi";
-
-		$this->output->set_content_type("application/json");
-
-		echo json_encode($welcome);
-	}
-
-	public function sparql() {
-
-		//$this->output->set_content_type("application/json");
-		
+	protected function get_dbpedia_results() {
 		$sparql = $this->yaml->parse_file("sparql.yml");
+
+		$results = array();
 
 		if ($sparql['queries']) {
 			foreach($sparql['queries'] as $query_obj) {
 				$name = $query_obj['name'];
-				$namespaces = $query_obj['namespaces'];
 				$query = $query_obj['query'];
-				//yell($query);
 
-				$results = $this->Sparql->get_results($namespaces, $query);
-				yell($results);
+				echo $this->DBPedia->get_results($query);
+				return;
+				array_push($results, json_decode($this->DBPedia->get_results($query)));
 				break;
 			}
 		}
+
+		return $results;
+	}
+
+	public function json() {
+	
+		$this->output->set_content_type("application/json");
+		// step 1 : get dbpedia results
+		$dbpedia_results = $this->get_dbpedia_results();
+
+
+		// step 2 : get wiki counts for each 
+
+		// step 3 : normalize counts for each entity
+
+		// step 4 : get dapi results for each entity
+
+		echo $dbpedia_results;
+		
+	}
+
+	public function dbpedia() {
+
+		$results = $this->get_dbpedia_results();
+		yell($results);
+		
 	}
 }
 
