@@ -29,10 +29,10 @@ queries:
             - about
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
-            SELECT DISTINCT ?person ?date
+            SELECT DISTINCT ?entity ?name ?date
              WHERE {
-              ?person ont:birthDate ?date .
-              ?person a dbpedia-owl:Athlete .
+              ?entity ont:birthDate ?date .
+              ?entity a dbpedia-owl:Athlete .
               ?entity foaf:name ?name
               FILTER(
                 ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
@@ -50,9 +50,9 @@ queries:
             - about
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
-            SELECT DISTINCT ?person ?date  WHERE {
-              ?person ont:birthDate ?date .
-              ?person a dbpedia-owl:Politician .
+            SELECT DISTINCT ?entity ?name ?date  WHERE {
+              ?entity ont:birthDate ?date .
+              ?entity a dbpedia-owl:Politician .
               ?entity foaf:name ?name
               FILTER(
                 ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
@@ -70,9 +70,9 @@ queries:
             - about
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
-            SELECT DISTINCT ?person ?date  WHERE {
-              ?person ont:birthDate ?date .
-              ?person a dbpedia-owl:MusicalArtist .
+            SELECT DISTINCT ?entity ?name ?date  WHERE {
+              ?entity ont:birthDate ?date .
+              ?entity a dbpedia-owl:MusicalArtist .
               ?entity foaf:name ?name
               FILTER(
                 ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
@@ -87,11 +87,11 @@ queries:
         discovery_map:
             - name
         query: |
-            SELECT * WHERE {
-                ?Country a dbpedia-owl:Country.
-                ?Country a yago:Country108544813.
-                ?Country dbpedia-owl:foundingDate ?date.
-                ?Country rdfs:label ?name
+            SELECT ?entity ?name ?date WHERE {
+                ?entity a dbpedia-owl:Country.
+                ?entity a yago:Country108544813.
+                ?entity dbpedia-owl:foundingDate ?date.
+                ?entity foaf:name ?name
                 FILTER(
                     ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
                 ( str(?date) <= "%TODAY%" ) &&
@@ -108,10 +108,10 @@ queries:
             - about
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
-            SELECT DISTINCT ?book ?name ?date WHERE {a
-                ?book a ont:Book;
+            SELECT DISTINCT ?entity ?name ?date WHERE {
+                ?entity a ont:Book;
                       ont:publicationDate ?date;
-                      rdfs:label ?name .
+                      foaf:name ?name .
                 FILTER(
                    ((datatype(?date) = xsd:date) || (datatype(?date) = xsd:dateTime)) &&
                    (str(?date) <= "%TODAY%") &&
