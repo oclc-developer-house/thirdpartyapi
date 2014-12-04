@@ -1,6 +1,15 @@
 thirdpartyapi
 =============
 
+
+User Story
+=========
+
+Library is interested in a current event and wants to create a card about said event.
+
+
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/oclc-developer-house/thirdpartyapi?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Third Party Data Sources pulled into Discovery API
 
 Use the [Jena SPARQL Tutorial](http://jena.apache.org/tutorials/sparql.html) to get started with SPARQL.
