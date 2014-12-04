@@ -76,9 +76,9 @@ FILTER(
  }
 ```
 
-```
 ## Find all the properties of a book
 
+```
 PREFIX ont: <http://dbpedia.org/ontology/>
 PREFIX prop: <http://dbpedia.org/property/>
 
