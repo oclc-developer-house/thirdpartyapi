@@ -131,3 +131,20 @@ FILTER(
   )
  }
 ```
+
+## Find films released on a particular day
+
+```
+PREFIX ont: <http://dbpedia.org/ontology/>
+SELECT DISTINCT ?entity ?name ?date WHERE {
+    ?entity a ont:Film;
+        ont:releaseDate ?date;
+        foaf:name ?name .
+    FILTER( 
+           ((datatype(?date) = xsd:date) || (datatype(?date) = xsd:dateTime)) &&
+           (str(?date) <= "2014-12-04") && 
+           (regex(str(?date), "[0-9]{4}-11-21")) && 
+           (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
+          )
+}
+```

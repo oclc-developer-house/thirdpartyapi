@@ -33,7 +33,7 @@ queries:
              WHERE {
               ?person ont:birthDate ?date .
               ?person a dbpedia-owl:Athlete .
-              ?person rdfs:label ?name
+              ?entity foaf:name ?name
               FILTER(
                 ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
                 ( str(?date) <= "%TODAY%" ) &&
@@ -53,7 +53,7 @@ queries:
             SELECT DISTINCT ?person ?date  WHERE {
               ?person ont:birthDate ?date .
               ?person a dbpedia-owl:Politician .
-              ?person rdfs:label ?name
+              ?entity foaf:name ?name
               FILTER(
                 ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
                 ( str(?date) <= "%TODAY%" ) &&
@@ -73,7 +73,7 @@ queries:
             SELECT DISTINCT ?person ?date  WHERE {
               ?person ont:birthDate ?date .
               ?person a dbpedia-owl:MusicalArtist .
-              ?person rdfs:label ?name
+              ?entity foaf:name ?name
               FILTER(
                 ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
                 ( str(?date) <= "%TODAY%" ) &&
@@ -83,7 +83,7 @@ queries:
             }
 
     -   name: "Countries"
-        description:
+        description: "Countries founding days"
         discovery_map:
             - name
         query: |
@@ -91,7 +91,7 @@ queries:
                 ?Country a dbpedia-owl:Country.
                 ?Country a yago:Country108544813.
                 ?Country dbpedia-owl:foundingDate ?date.
-        ?Country rdfs:label ?name
+                ?Country rdfs:label ?name
                 FILTER(
                     ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
                 ( str(?date) <= "%TODAY%" ) &&
@@ -107,15 +107,15 @@ queries:
             - uniformName
             - about
         query: |
-            PREFIX ont: <http://dbpedia.org/ontology/> 
-            SELECT DISTINCT ?book ?name ?date WHERE {
+            PREFIX ont: <http://dbpedia.org/ontology/>
+            SELECT DISTINCT ?book ?name ?date WHERE {a
                 ?book a ont:Book;
                       ont:publicationDate ?date;
                       rdfs:label ?name .
-                FILTER( 
+                FILTER(
                    ((datatype(?date) = xsd:date) || (datatype(?date) = xsd:dateTime)) &&
-                   (str(?date) <= "%TODAY%") && 
-                   (regex(str(?date), "[0-9]{4}-%MONTH%-%DAY%")) && 
+                   (str(?date) <= "%TODAY%") &&
+                   (regex(str(?date), "[0-9]{4}-%MONTH%-%DAY%")) &&
                    (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
                 )
             }
