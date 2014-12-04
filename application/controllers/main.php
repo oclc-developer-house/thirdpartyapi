@@ -24,6 +24,7 @@ class Main extends CI_Controller {
 		parent::__construct();
 
 		$this->load->Model('DBPedia');
+		$this->load->model('Wikipedia');
 
 		$this->load->helper('form');
 		$this->load->helper('dev');
@@ -73,15 +74,62 @@ class Main extends CI_Controller {
 		// step 1 : get dbpedia results
 		$dbpedia_results = $this->get_dbpedia_results();
 
-
 		// step 2 : get wiki counts for each 
+		$entities = $this->get_wikipedia_data($dbpedia_results);
 
 		// step 3 : normalize counts for each entity
 
 		// step 4 : get dapi results for each entity
 
-		print_r($dbpedia_results);
+		print_r($entities);
 		
+	}
+
+	protected function get_wikipedia_data($dbpedia_results){
+		$entities = array();
+		$revisions = array();
+		$lengths = array();
+		$links = array();
+
+		foreach ($dbpedia_results as $entity){
+			$uri = $entity->get_id();
+			$title = str_replace('http://dbpedia.org/resource/', '', $uri);
+			$this->Wikipedia->initialize($title);
+			$wikipedia_results = array();
+			$wikipedia_results['revision_count'] = $this->Wikipedia->get_revision_count();
+			$wikipedia_results['article_length'] = $this->Wikipedia->get_article_length();
+			$wikipedia_results['num_external_links'] = $this->Wikipedia->get_num_external_links();
+      $entity->set_rank_map($wikipedia_results);
+			$entities[] = $entity;
+
+			$revisions[] = $wikipedia_results['revision_count'];
+			$lengths[] = $wikipedia_results['article_length'];
+			$links[] = $wikipedia_results['num_external_links'];
+    }
+    
+    $revisions_min = min($revisions);
+    $revisions_max = max($revisions);
+    
+    $length_min = min($lengths);
+    $length_max = max($lengths);
+    
+    $links_min = min($links);
+    $links_max = max($links); 
+
+    $full_entities = array();
+    foreach ($entities as $e){
+    	$rank_map = $e->get_rank_map();
+    	$rank_map['normalized_revision_count'] = 
+    		($rank_map['revision_count'] - $revisions_min) / ($revisions_max - $revisions_min);
+    	$rank_map['normalized_article_length'] = 
+    		($rank_map['article_length'] - $length_min) / ($length_max - $length_min);
+    	$rank_map['normalized_num_external_links'] = 
+    		($rank_map['num_external_links'] - $links_min) / ($links_max - $links_min);
+    	$e->set_rank_map($rank_map);
+    	$full_entities[] = $e;
+    }
+
+    return $entities;
 	}
 
 }
