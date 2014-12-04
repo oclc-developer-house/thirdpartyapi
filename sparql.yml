@@ -9,11 +9,11 @@ queries:
             - about: "person"
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
-            SELECT DISTINCT ?person ?date  
+            SELECT DISTINCT ?entity ?date ?name
             WHERE {
-              ?person ont:birthDate ?date .
-              ?person a dbpedia-owl:Writer .
-              ?person rdfs:label ?name
+              ?entity ont:birthDate ?date .
+              ?entity a dbpedia-owl:Writer .
+              ?entity foaf:name ?name
               FILTER(
                 ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
                 ( str(?date) <= "%TODAY%" ) &&

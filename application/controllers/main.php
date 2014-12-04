@@ -45,15 +45,25 @@ class Main extends CI_Controller {
 			foreach($sparql['queries'] as $query_obj) {
 				$name = $query_obj['name'];
 				$query = $query_obj['query'];
-
-				echo $this->DBPedia->get_results($query);
-				return;
-				array_push($results, json_decode($this->DBPedia->get_results($query)));
+				$query = $this->set_query_dates($query);
+				array_push($results, $this->DBPedia->get_results($query));
 				break;
 			}
 		}
 
 		return $results;
+	}
+
+	protected function set_query_dates($query){
+		$today = date('Y-m-d');
+		$month = date('m');
+		$day = date('d');
+
+		$query = str_replace('%TODAY%', $today, $query);
+		$query = str_replace('%MONTH%', $month, $query);
+		$query = str_replace('%DAY%', $day, $query);
+
+		return $query;
 	}
 
 	public function json() {
@@ -69,16 +79,10 @@ class Main extends CI_Controller {
 
 		// step 4 : get dapi results for each entity
 
-		echo $dbpedia_results;
+		echo json_encode($dbpedia_results);
 		
 	}
 
-	public function dbpedia() {
-
-		$results = $this->get_dbpedia_results();
-		yell($results);
-		
-	}
 }
 
 /* End of file welcome.php */
