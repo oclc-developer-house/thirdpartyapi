@@ -92,6 +92,25 @@ WHERE
 } 
 ORDER BY ?prop
 ```
+## Find books published on a particular day
+
+```
+PREFIX ont: <http://dbpedia.org/ontology/> 
+PREFIX prop: <http://dbpedia.org/property/>
+
+SELECT DISTINCT ?book ?name ?date
+WHERE
+{ 
+    ?book ont:publicationDate ?date .
+    ?book prop:name ?name
+    FILTER( 
+                 ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
+                 ( str(?date) <= "2014-12-02" ) && 
+                 ( regex(str(?date), "[0-9]{4}-12-02") ) 
+                )
+}
+LIMIT 50
+```
 
 ## Find organizations founded on a particular day (excludes educational institutions)
 
