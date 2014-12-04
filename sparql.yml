@@ -2,26 +2,23 @@
 
 
 queries:
-    -   name: "Name of Query"
+    -   name: "Writers"
         description:
         discovery_map:
             - name: "name" 
             - creator: "person"
             - about: "person"
-        namespaces:
-            - ont: "http://dbpedia.org/ontology/"
         - query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
-            PREFIX prop: <http://dbpedia.org/property/>
             SELECT DISTINCT ?person ?date ?name  WHERE { 
               ?person ont:birthDate ?date .
               ?person a dbpedia-owl:Writer .
-              ?person prop:name ?name
+              ?person rdfs:label ?name
               FILTER( 
                 ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) && 
-                ( ?date <= "2014-12-02"^^xsd:dateTime ) && 
                 ( regex(str(?date), "[0-9]{4}-12-02") ) 
               ) 
+              FILTER(LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
             }
             LIMIT 20
         name: "Athletes"
@@ -30,20 +27,17 @@ queries:
             - name: "name" 
             - creator: "person"
             - about: "person"
-        namespaces:
-            - ont: "http://dbpedia.org/ontology/"
        - query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
-            PREFIX prop: <http://dbpedia.org/property/>
             SELECT DISTINCT ?person ?date ?name  WHERE { 
               ?person ont:birthDate ?date .
               ?person a dbpedia-owl:Athlete .
-              ?person prop:name ?name
+              ?person rdfs:label ?name
               FILTER( 
                 ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) && 
-                ( ?date <= "2014-12-02"^^xsd:dateTime ) && 
                 ( regex(str(?date), "[0-9]{4}-12-02") ) 
               ) 
+              FILTER(LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
             }
             LIMIT 20
         name: "Politicians"
@@ -52,20 +46,17 @@ queries:
             - name: "name" 
             - creator: "person"
             - about: "person"
-        namespaces:
-            - ont: "http://dbpedia.org/ontology/"
     - query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
-            PREFIX prop: <http://dbpedia.org/property/>
             SELECT DISTINCT ?person ?date ?name WHERE { 
               ?person ont:birthDate ?date .
               ?person a dbpedia-owl:Politician .
-              ?person prop:name ?name
+              ?person rdfs:label ?name
               FILTER( 
                 ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) && 
-                ( ?date <= "2014-12-02"^^xsd:dateTime ) && 
                 ( regex(str(?date), "[0-9]{4}-12-02") ) 
               ) 
+              FILTER(LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
             }
             LIMIT 20
         name: "Musicians"
@@ -74,20 +65,17 @@ queries:
             - name: "name" 
             - creator: "person"
             - about: "person"
-        namespaces:
-            - ont: "http://dbpedia.org/ontology/"
     - query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
-            PREFIX prop: <http://dbpedia.org/property/>
             SELECT DISTINCT ?person ?date ?name  WHERE { 
               ?person ont:birthDate ?date .
               ?person a dbpedia-owl:MusicalArtist .
-              ?person prop:name ?name
+              ?person rdfs:label ?name
               FILTER( 
                 ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) && 
-                ( ?date <= "2014-12-02"^^xsd:dateTime ) && 
                 ( regex(str(?date), "[0-9]{4}-12-02") ) 
               ) 
+              FILTER(LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
             }
             LIMIT 20
     - query: |
@@ -96,7 +84,6 @@ queries:
          ?Location dbpedia-owl:date ?date.
         FILTER( 
             ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) && 
-            ( ?date <= "2014-12-02"^^xsd:dateTime ) && 
             ( regex(str(?date), "[0-9]{4}-12-02") ) 
           )
          }
