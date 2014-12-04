@@ -1,7 +1,7 @@
 # Sparql queries go here
 
 queries:
-    -   name: "Name of Query"
+    -   name: "Writers"
         description:
         discovery_map:
             - name: "name"
@@ -10,7 +10,7 @@ queries:
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
             SELECT DISTINCT ?person ?date  
-			WHERE {
+            WHERE {
               ?person ont:birthDate ?date .
               ?person a dbpedia-owl:Writer .
               ?person rdfs:label ?name
@@ -30,7 +30,7 @@ queries:
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
             SELECT DISTINCT ?person ?date  
-			WHERE {
+            WHERE {
               ?person ont:birthDate ?date .
               ?person a dbpedia-owl:Athlete .
               ?person rdfs:label ?name
@@ -91,7 +91,7 @@ queries:
                 ?Country a dbpedia-owl:Country.
                 ?Country a yago:Country108544813.
                 ?Country dbpedia-owl:foundingDate ?date.
-				?Country rdfs:label ?name
+                ?Country rdfs:label ?name
                 FILTER(
                     ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
                 ( str(?date) <= "%TODAY%" ) &&
