@@ -1,6 +1,8 @@
 Data Diem
 =========
 
+Third Party Data Sources pulled into OCLC's Discovery API
+
 User Story
 ----------
 
@@ -13,8 +15,6 @@ Acceptance
 -	Produces a list of items.
 
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/oclc-developer-house/thirdpartyapi?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-Third Party Data Sources pulled into Discovery API
 
 Use the [Jena SPARQL Tutorial](http://jena.apache.org/tutorials/sparql.html) to get started with SPARQL. More information on how to get up to speed with SPARQL from this [Code4lib List discussion](https://listserv.nd.edu/cgi-bin/wa?A1=ind1405&L=CODE4LIB#11)
 
