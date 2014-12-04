@@ -1,6 +1,5 @@
 # Sparql queries go here
 
-
 queries:
     -   name: "Name of Query"
         description:
