@@ -95,6 +95,7 @@ queries:
                 query: |
                     SELECT * WHERE {
                         ?Country a dbpedia-owl:Country.
+                        ?Country a yago:Country108544813.
                         ?Country dbpedia-owl:foundingDate ?date.
                         FILTER(
                             ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
