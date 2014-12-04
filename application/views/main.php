@@ -1,13 +1,408 @@
-<?php
-echo form_open('query_form');
-echo form_textarea(array(
-		'name' => 'query',
-		'id' => 'query_txt'
-	));
-echo "<br/>";
-echo form_submit('search_btn', "Search");
-echo form_close();
-?>
+<!doctype html>
+<html>
+	<head>
 
-<div id="result">
+		<title>DAPI Diem</title>
+		<div class="page-header">
+  <h1>DAPI Diem     <small>Have a DAPI day!</small></h1>
 </div>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+		<!--responsive design-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+	</head>
+
+	<body>
+	<div class="container-fluid"></div>
+<div class="row-fluid">
+<h2>Writers</h2>
+  <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 1</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 2</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 3</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 4</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 5</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 6</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-fluid">
+<h2>Countries</h2>
+  <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 1</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 2</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 3</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 4</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 5</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+      <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 6</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+
+</div>
+	<div class="row-fluid">
+		<h2>Musicians</h2>
+  <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 1</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 2</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 3</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 4</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 5</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+      <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 6</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+
+	</div>
+	<div class="row-fluid">
+		<h2>Athletes</h2>
+  <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 1</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 2</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 3</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 4</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 5</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+      <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 6</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+
+	</div>
+	<div class="row-fluid">
+		<h2>Politicians</h2>
+  <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 1</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 2</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 3</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 4</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 5</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+      <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 6</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+
+	</div>
+	<div class="row-fluid">
+		<h2>Books</h2>
+  <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 1</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 2</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 3</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 4</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 5</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+	</div>
+	    <div class="col-sm-2 col-md-2">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x300" alt="...">
+      <div class="caption">
+        <h3>Result 6</h3>
+        <p>...</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+
+	</div>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	</body>
+</html>
