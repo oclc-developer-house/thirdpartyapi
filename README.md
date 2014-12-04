@@ -1,12 +1,15 @@
 thirdpartyapi
 =============
 
-
 User Story Changed
 ==================
 
-Library is interested in a current event and wants to create a card about said event.
+Library is interested in a current event and wants to create a card about said event. The current prototype takes "Born today `SPARQL`ed" [DBPedia](http://dbpedia.org) entities and runs them against [OCLC's Discovery API](http://oclc.org/developer/develop/web-services/worldcat-discovery-api.en.html) to bring back what is available locally.
 
+Acceptance
+----------
+
+Produces a list of items.
 
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/oclc-developer-house/thirdpartyapi?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
