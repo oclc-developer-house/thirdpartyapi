@@ -39,7 +39,7 @@ SELECT ?event WHERE {
  ?event dbpedia-owl:date ?date.
 FILTER( 
     ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) && 
-    ( ?date <= "2014-12-02"^^xsd:dateTime ) && 
+          ( str(?date) <= "2014-12-02" ) && 
     ( regex(str(?date), "[0-9]{4}-12-02") ) 
   )
  }
@@ -57,6 +57,7 @@ SELECT * WHERE {
  ?Country dbpedia-owl:foundingDate ?date.
 FILTER( 
     ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) && 
+            ( str(?date) <= "2014-12-02" ) && 
     ( regex(str(?date), "[0-9]{4}-12-02") ) 
   )
  }
@@ -124,6 +125,7 @@ FILTER NOT EXISTS {?Org a dbpedia-owl:EducationalInstitution.}
 
 FILTER( 
     ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) && 
+            ( str(?date) <= "2014-12-02" ) && 
     ( regex(str(?date), "[0-9]{4}-12-02") ) 
   )
  }
