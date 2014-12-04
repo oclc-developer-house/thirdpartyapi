@@ -24,7 +24,6 @@ class Main extends CI_Controller {
 		parent::__construct();
 
 		$this->load->Model('DBPedia');
-		$this->load->model('Wikipedia');
 
 		$this->load->helper('form');
 		$this->load->helper('dev');
@@ -74,8 +73,8 @@ class Main extends CI_Controller {
 		// step 1 : get dbpedia results
 		$dbpedia_results = $this->get_dbpedia_results();
 
+
 		// step 2 : get wiki counts for each 
-		$entities = $this->get_wikipedia_data($dbpedia_results);
 
 		// step 3 : normalize counts for each entity
 
@@ -84,7 +83,7 @@ class Main extends CI_Controller {
 
 		//$dapi_results = $dapi->search("name:john+smith+or+name:smith+john");
 
-		print_r($entities);
+		print_r($dbpedia_results);
 		
 	}
 
@@ -166,7 +165,6 @@ class Main extends CI_Controller {
 		$this->load->helper('file');
 		echo read_file(FCPATH . "testdbpedia.json");
 	}
-
 }
 
 /* End of file welcome.php */

@@ -2,7 +2,7 @@
 
 queries:
     -   name: "Writers"
-        description:
+        description: "%NAME% was born on %DATE%."
         discovery_map:
             - name
             - creator
@@ -11,8 +11,9 @@ queries:
             PREFIX ont: <http://dbpedia.org/ontology/>
             SELECT DISTINCT ?entity ?date ?name
             WHERE {
-              ?entity a ont:birthDate;
-              ?entity foaf:name ?name .
+              ?entity ont:birthDate ?date .
+              ?entity a dbpedia-owl:Writer .
+              ?entity foaf:name ?name
               FILTER(
                 ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
                 ( str(?date) <= "%TODAY%" ) &&
@@ -22,17 +23,18 @@ queries:
             }
             LIMIT 5
     -   name: "Athletes"
-        description:
+        description: "%NAME% was born on %DATE%."
         discovery_map:
             - name
             - creator
             - about
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
-            SELECT DISTINCT ?entity ?person ?date
+            SELECT DISTINCT ?entity ?name ?date
              WHERE {
-              ?entity a ont:birthDate;
-              ?entity foaf:name ?name .
+              ?entity ont:birthDate ?date .
+              ?entity a dbpedia-owl:Athlete .
+              ?entity foaf:name ?name
               FILTER(
                 ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
                 ( str(?date) <= "%TODAY%" ) &&
@@ -41,16 +43,17 @@ queries:
               )
             }
     -   name: "Politicians"
-        description:
+        description: "%NAME% was born on %DATE%."
         discovery_map:
             - name
             - creator
             - about
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
-            SELECT DISTINCT ?entity ?date ?name WHERE {
-              ?entity a ont:birthDate;
-              ?entity foaf:name ?name .
+            SELECT DISTINCT ?entity ?name ?date  WHERE {
+              ?entity ont:birthDate ?date .
+              ?entity a dbpedia-owl:Politician .
+              ?entity foaf:name ?name
               FILTER(
                 ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
                 ( str(?date) <= "%TODAY%" ) &&
@@ -59,16 +62,17 @@ queries:
               )
             }
     -   name: "Musicians"
-        description:
+        description: "%NAME% was born on %DATE%."
         discovery_map:
             - name
             - creator
             - about
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
-            SELECT DISTINCT ?entity ?date ?name  WHERE {
-              ?entity a ont:birthDate;
-              ?entity foaf:name ?name .
+            SELECT DISTINCT ?entity ?name ?date  WHERE {
+              ?entity ont:birthDate ?date .
+              ?entity a dbpedia-owl:MusicalArtist .
+              ?entity foaf:name ?name
               FILTER(
                 ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
                 ( str(?date) <= "%TODAY%" ) &&
@@ -78,15 +82,15 @@ queries:
             }
 
     -   name: "Countries"
-        description: "Countries founding days"
+        description: "%NAME% was founded on %DATE%."
         discovery_map:
             - name
         query: |
-            SELECT DISTINCT ?entity ?date ?name WHERE {
+            SELECT ?entity ?name ?date WHERE {
                 ?entity a dbpedia-owl:Country.
                 ?entity a yago:Country108544813.
                 ?entity dbpedia-owl:foundingDate ?date.
-                ?entity rdfs:label ?name
+                ?entity foaf:name ?name
                 FILTER(
                     ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
                 ( str(?date) <= "%TODAY%" ) &&
@@ -95,17 +99,17 @@ queries:
                 )
             }
     -   name: "Books"
-        description: "Book titles published on the selected date."
+        description: "%NAME% was published on %DATE%."
         discovery_map:
             - name
             - uniformName
             - about
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
-            SELECT DISTINCT ?entity ?name ?date WHERE {a
+            SELECT DISTINCT ?entity ?name ?date WHERE {
                 ?entity a ont:Book;
                       ont:publicationDate ?date;
-                      rdfs:label ?name .
+                      foaf:name ?name .
                 FILTER(
                    ((datatype(?date) = xsd:date) || (datatype(?date) = xsd:dateTime)) &&
                    (str(?date) <= "%TODAY%") &&
@@ -115,7 +119,7 @@ queries:
             }
 
     -   name: "Films"
-        description: "Films released on the selected date."
+        description: "%NAME% was released to theaters on %DATE%."
         discovery_map:
             - name
             - uniformName
