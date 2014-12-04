@@ -5,6 +5,8 @@ require_once FCPATH . "vendor/autoload.php";
 use OCLC\Auth\WSKey;
 use OCLC\Auth\AccessToken;
 use WorldCat\Discovery\Bib;
+use WorldCat\Discovery\Person;
+use WorldCat\Discovery\CreatieWork;
 
 class Dapi {
 
@@ -20,10 +22,18 @@ class Dapi {
 	}	
 	
 
-	public function get_bib() {
-		$bib = Bib::Find(7977212, $this->accessToken);
+	public function search($query = "") {
+		$response = Bib::Search($query, $this->accessToken);
 
-		yell($bib);
+		if (is_a($response, "WordlCat\Discovery\Error")) {
+			echo $response->getErrorCode();
+			echo $response->getErrorMessage();
+		}else {
+			//yell($results);
+			return $response;
+		}
+		
+
 	}
 
 }
