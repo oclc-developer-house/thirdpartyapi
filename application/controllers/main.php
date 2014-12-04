@@ -24,6 +24,7 @@ class Main extends CI_Controller {
 		parent::__construct();
 
 		$this->load->Model('DBPedia');
+		$this->load->model('Wikipedia');
 
 		$this->load->helper('form');
 		$this->load->helper('dev');
@@ -75,6 +76,7 @@ class Main extends CI_Controller {
 
 
 		// step 2 : get wiki counts for each 
+		$entities = $this->get_wikipedia_data($dbpedia_results);
 
 		// step 3 : normalize counts for each entity
 
@@ -151,22 +153,18 @@ class Main extends CI_Controller {
 
 			$dapi_query = implode(" OR ", $dapi_query_array);
 
-			yell($dapi_query);
+			//yell($dapi_query);
 			$dapi_response = $dapi->search($dapi_query);
 			$dapi_results = $dapi_response->getSearchResults();
 
 			$dapi_total_count = $dapi_response->getTotalResults();
 			$result_count[] = $dapi_total_count;
 
-			echo count($dapi_results);
-			//yell($dapi_results);
-
-			foreach($dapi_results as $dapi_result) {
+			/*foreach($dapi_results as $dapi_result) {
 				yell($dapi_result->getName()->getValue());
 				yell($dapi_result->getAuthor()->getValue());
-			}
+			}*/
 
-			break;
 
 			$rank_map = $entity->get_rank_map();
 			$rank_map['dapi_count'] = $dapi_total_count;
@@ -188,6 +186,8 @@ class Main extends CI_Controller {
 			$entity->set_rank_map($rank_map);
 
 			yell($entity);
+
+
 		}
 
 		return $entities;
