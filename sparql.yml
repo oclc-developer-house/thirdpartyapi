@@ -2,7 +2,7 @@
 
 queries:
     -   name: "Writers"
-        description:
+        description: "%NAME% was born on %DATE%."
         discovery_map:
             - name
             - creator
@@ -22,7 +22,7 @@ queries:
               )
             }
     -   name: "Athletes"
-        description:
+        description: "%NAME% was born on %DATE%."
         discovery_map:
             - name
             - creator
@@ -43,7 +43,7 @@ queries:
             }
 
     -   name: "Politicians"
-        description:
+        description: "%NAME% was born on %DATE%."
         discovery_map:
             - name
             - creator
@@ -63,7 +63,7 @@ queries:
             }
 
     -   name: "Musicians"
-        description:
+        description: "%NAME% was born on %DATE%."
         discovery_map:
             - name
             - creator
@@ -83,7 +83,7 @@ queries:
             }
 
     -   name: "Countries"
-        description: "Countries founding days"
+        description: "%NAME% was founded on %DATE%."
         discovery_map:
             - name
         query: |
@@ -101,7 +101,7 @@ queries:
             }
 
     -   name: "Books"
-        description: "Book titles published on the selected date."
+        description: "%NAME% was published on %DATE%."
         discovery_map:
             - name
             - uniformName
@@ -121,7 +121,7 @@ queries:
             }
 
     -   name: "Films"
-        description: "Films released on the selected date."
+        description: "%NAME% was released to theaters on %DATE%."
         discovery_map:
             - name
             - uniformName
