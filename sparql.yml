@@ -11,6 +11,8 @@ queries:
         namespaces:
             - ont: "http://dbpedia.org/ontology/"
         query: |
+            PREFIX ont: <http://dbpedia.org/ontology/>
+            PREFIX prop: <http://dbpedia.org/prop/>
             SELECT DISTINCT ?person ?date  WHERE {
               ?person ont:birthDate ?date .
               ?person a dbpedia-owl:Writer .
@@ -22,8 +24,7 @@ queries:
               )
             }
             LIMIT 50
-
-        name: "Athletes"
+    -   name: "Athletes"
         description:
         discovery_map:
             - name: "name"
@@ -32,6 +33,8 @@ queries:
         namespaces:
             - ont: "http://dbpedia.org/ontology/"
         query: |
+            PREFIX ont: <http://dbpedia.org/ontology/>
+            PREFIX prop: <http://dbpedia.org/prop/>
             SELECT DISTINCT ?person ?date  WHERE {
               ?person ont:birthDate ?date .
               ?person a dbpedia-owl:Athlete .
@@ -44,7 +47,7 @@ queries:
             }
             LIMIT 50
 
-        name: "Politicians"
+    -   name: "Politicians"
         description:
         discovery_map:
             - name: "name"
@@ -53,6 +56,8 @@ queries:
         namespaces:
             - ont: "http://dbpedia.org/ontology/"
         query: |
+            PREFIX ont: <http://dbpedia.org/ontology/>
+            PREFIX prop: <http://dbpedia.org/prop/>
             SELECT DISTINCT ?person ?date  WHERE {
               ?person ont:birthDate ?date .
               ?person a dbpedia-owl:Politician .
@@ -65,7 +70,7 @@ queries:
             }
             LIMIT 50
 
-        name: "Musicians"
+    -   name: "Musicians"
         description:
         discovery_map:
             - name: "name"
@@ -74,6 +79,8 @@ queries:
         namespaces:
             - ont: "http://dbpedia.org/ontology/"
         query: |
+            PREFIX ont: <http://dbpedia.org/ontology/>
+            PREFIX prop: <http://dbpedia.org/prop/>
             SELECT DISTINCT ?person ?date  WHERE {
               ?person ont:birthDate ?date .
               ?person a dbpedia-owl:MusicalArtist .
@@ -86,19 +93,19 @@ queries:
             }
             LIMIT 50
 
-        name: "Countries"
-                description:
-                discovery_map:
-                    - name: "country"
-                namespaces:
-                    - ont: "http://dbpedia.org/ontology/"
-                query: |
-                    SELECT * WHERE {
-                        ?Country a dbpedia-owl:Country.
-                        ?Country a yago:Country108544813.
-                        ?Country dbpedia-owl:foundingDate ?date.
-                        FILTER(
-                            ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
-                            ( regex(str(?date), "[0-9]{4}-12-05") )
-                        )
-                    }
+    -   name: "Countries"
+        description:
+        discovery_map:
+            - name: "country"
+        namespaces:
+            - ont: "http://dbpedia.org/ontology/"
+        query: |
+            SELECT * WHERE {
+                ?Country a dbpedia-owl:Country.
+                ?Country a yago:Country108544813.
+                ?Country dbpedia-owl:foundingDate ?date.
+                FILTER(
+                    ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
+                    ( regex(str(?date), "[0-9]{4}-12-05") )
+                )
+            }
