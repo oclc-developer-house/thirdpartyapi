@@ -1,12 +1,12 @@
 # Sparql queries go here
 
 queries:
-    -   name: "Name of Query"
+    -   name: "Writers"
         description:
         discovery_map:
-            - name: "name"
-            - creator: "person"
-            - about: "person"
+            - name
+            - creator
+            - about
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
             SELECT DISTINCT ?entity ?date ?name
@@ -24,9 +24,9 @@ queries:
     -   name: "Athletes"
         description:
         discovery_map:
-            - name: "name"
-            - creator: "person"
-            - about: "person"
+            - name
+            - creator
+            - about
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
             SELECT DISTINCT ?person ?date
@@ -45,9 +45,9 @@ queries:
     -   name: "Politicians"
         description:
         discovery_map:
-            - name: "name"
-            - creator: "person"
-            - about: "person"
+            - name
+            - creator
+            - about
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
             SELECT DISTINCT ?person ?date  WHERE {
@@ -65,9 +65,9 @@ queries:
     -   name: "Musicians"
         description:
         discovery_map:
-            - name: "name"
-            - creator: "person"
-            - about: "person"
+            - name
+            - creator
+            - about
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
             SELECT DISTINCT ?person ?date  WHERE {
@@ -85,7 +85,7 @@ queries:
     -   name: "Countries"
         description:
         discovery_map:
-            - name: "country"
+            - name
         query: |
             SELECT * WHERE {
                 ?Country a dbpedia-owl:Country.
@@ -103,8 +103,9 @@ queries:
     -   name: "Books"
         description: "Book titles published on the selected date."
         discovery_map:
-            - name: "name"
-            - about: "name"
+            - name
+            - uniformName
+            - about
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/> 
             SELECT DISTINCT ?book ?name ?date WHERE {
