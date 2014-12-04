@@ -7,44 +7,40 @@ queries:
             - name: "name"
             - creator: "person"
             - about: "person"
-        namespaces:
-            - ont: "http://dbpedia.org/ontology/"
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
-            PREFIX prop: <http://dbpedia.org/prop/>
-            SELECT DISTINCT ?person ?date  WHERE {
+            SELECT DISTINCT ?person ?date  
+			WHERE {
               ?person ont:birthDate ?date .
               ?person a dbpedia-owl:Writer .
-              ?person prop:name ?name
+              ?person rdfs:label ?name
               FILTER(
                 ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
-                ( ?date <= "2014-12-02"^^xsd:dateTime ) &&
-                ( regex(str(?date), "[0-9]{4}-12-02") )
+                ( str(?date) <= "%TODAY%" ) &&
+                ( regex(str(?date), "[0-9]{4}-%MONTH%-%DAY%") )&& 
+                (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
               )
             }
-            LIMIT 50
     -   name: "Athletes"
         description:
         discovery_map:
             - name: "name"
             - creator: "person"
             - about: "person"
-        namespaces:
-            - ont: "http://dbpedia.org/ontology/"
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
-            PREFIX prop: <http://dbpedia.org/prop/>
-            SELECT DISTINCT ?person ?date  WHERE {
+            SELECT DISTINCT ?person ?date  
+			WHERE {
               ?person ont:birthDate ?date .
               ?person a dbpedia-owl:Athlete .
-              ?person prop:name ?name
+              ?person rdfs:label ?name
               FILTER(
                 ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
-                ( ?date <= "2014-12-02"^^xsd:dateTime ) &&
-                ( regex(str(?date), "[0-9]{4}-12-02") )
+                ( str(?date) <= "%TODAY%" ) &&
+                ( regex(str(?date), "[0-9]{4}-%MONTH%-%DAY%") )&& 
+                (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
               )
             }
-            LIMIT 50
 
     -   name: "Politicians"
         description:
@@ -52,22 +48,19 @@ queries:
             - name: "name"
             - creator: "person"
             - about: "person"
-        namespaces:
-            - ont: "http://dbpedia.org/ontology/"
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
-            PREFIX prop: <http://dbpedia.org/prop/>
             SELECT DISTINCT ?person ?date  WHERE {
               ?person ont:birthDate ?date .
               ?person a dbpedia-owl:Politician .
-              ?person prop:name ?name
+              ?person rdfs:label ?name
               FILTER(
                 ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
-                ( ?date <= "2014-12-02"^^xsd:dateTime ) &&
-                ( regex(str(?date), "[0-9]{4}-12-02") )
+                ( str(?date) <= "%TODAY%" ) &&
+                ( regex(str(?date), "[0-9]{4}-%MONTH%-%DAY%") )&& 
+                (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
               )
             }
-            LIMIT 50
 
     -   name: "Musicians"
         description:
@@ -75,36 +68,34 @@ queries:
             - name: "name"
             - creator: "person"
             - about: "person"
-        namespaces:
-            - ont: "http://dbpedia.org/ontology/"
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
-            PREFIX prop: <http://dbpedia.org/prop/>
             SELECT DISTINCT ?person ?date  WHERE {
               ?person ont:birthDate ?date .
               ?person a dbpedia-owl:MusicalArtist .
-              ?person prop:name ?name
+              ?person rdfs:label ?name
               FILTER(
                 ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
-                ( ?date <= "2014-12-02"^^xsd:dateTime ) &&
-                ( regex(str(?date), "[0-9]{4}-12-02") )
+                ( str(?date) <= "%TODAY%" ) &&
+                ( regex(str(?date), "[0-9]{4}-%MONTH%-%DAY%") )&& 
+                (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
               )
             }
-            LIMIT 50
 
     -   name: "Countries"
         description:
         discovery_map:
             - name: "country"
-        namespaces:
-            - ont: "http://dbpedia.org/ontology/"
         query: |
             SELECT * WHERE {
                 ?Country a dbpedia-owl:Country.
                 ?Country a yago:Country108544813.
                 ?Country dbpedia-owl:foundingDate ?date.
+				?Country rdfs:label ?name
                 FILTER(
                     ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
-                    ( regex(str(?date), "[0-9]{4}-12-05") )
+                ( str(?date) <= "%TODAY%" ) &&
+                ( regex(str(?date), "[0-9]{4}-%MONTH%-%DAY%") )&& 
+                (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
                 )
             }
