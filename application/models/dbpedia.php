@@ -3,6 +3,7 @@
 include_once('entity.php');
 
 class DBPedia extends CI_Model {
+	protected $sparql_config;
 
 	function __construct() {
 		parent::__construct();
@@ -12,13 +13,26 @@ class DBPedia extends CI_Model {
 		$this->load->helper('dev');
 	}
 
+	function initialize($sparql_config){
+		$this->sparql_config = $sparql_config;
+	}
+
 	function get_results($query) {
 		$sparql = new MY_Sparql();
 
 		// get sparql data
 		$sparql_results = $sparql->query($query);
 		$dedup_results = $this->dedup_results($sparql_results);
-		return $dedup_results;
+		$entities = array();
+		foreach  ($dedup_results as $uri => $props){
+			$entity = new Entity();
+			$entity->set_id($uri);
+			$entity->set_terms($props['name']);
+			$entity->set_dapi_map($this->sparql_config['discovery_map']);
+			$entity->set_label($this->sparql_config['name']);
+			$entities[] = $entity;
+		}
+		return $entities;
 	}
 
 	// De-dup baed on the entity URI, compile list of names

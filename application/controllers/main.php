@@ -43,10 +43,11 @@ class Main extends CI_Controller {
 
 		if ($sparql['queries']) {
 			foreach($sparql['queries'] as $query_obj) {
-				$name = $query_obj['name'];
+				$this->DBPedia->initialize($query_obj);
 				$query = $query_obj['query'];
 				$query = $this->set_query_dates($query);
-				array_push($results, $this->DBPedia->get_results($query));
+				$query_results = $this->DBPedia->get_results($query);
+				$results = array_merge($results, $query_results);
 				break;
 			}
 		}
@@ -79,7 +80,7 @@ class Main extends CI_Controller {
 
 		// step 4 : get dapi results for each entity
 
-		echo json_encode($dbpedia_results);
+		print_r($dbpedia_results);
 		
 	}
 

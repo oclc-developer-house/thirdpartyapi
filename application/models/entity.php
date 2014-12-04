@@ -2,18 +2,17 @@
 
 
 class Entity {
-
+	protected $id;
+	protected $terms; // DAPI search terms
 	protected $label;
 	protected $image;
 	protected $rank;
-	protected $rank_map;
-
-	protected $dapi_map;
+	protected $rank_map; // key value for ranking components
+	protected $dapi_map; // indicies for DAPI queries
 	protected $holdings;
 
 	public function __construct() {
-		parent::__construct();
-
+		$this->terms = array();
 		$this->label = "Test Label";
 		$this->image = "image uri";
 		$this->rank_map = array();
@@ -26,7 +25,23 @@ class Entity {
 	}
 
 	public function set_label($label = "") {
-		$this->label = label;
+		$this->label = $label;
+	}
+
+	public function get_id() {
+		return $this->id;
+	}
+
+	public function set_id($id = "") {
+		$this->id = $id;
+	}
+
+	public function get_terms() {
+		return $this->terms;
+	}
+
+	public function set_terms($terms = array()) {
+		$this->terms = $terms;
 	}
 
 	public function get_image() {
@@ -35,6 +50,14 @@ class Entity {
 
 	public function set_image($uri = "") {
 		$this->image = $uri;
+	}
+
+	public function get_dapi_map() {
+		return $this->dapi_map;
+	}
+
+	public function set_dapi_map($map = array()) {
+		$this->dapi_map = $map;
 	}
 
 	public function get_rank_map() {
