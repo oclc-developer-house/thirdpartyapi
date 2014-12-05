@@ -28,6 +28,8 @@ class DBPedia extends CI_Model {
 			$entity = new Entity();
 			$entity->set_id($uri);
 			$entity->set_terms($props['name']);
+			$entity->set_image($props['thumbnail']);
+			$entity->set_description($props['abstract']);
 			$entity->set_dapi_map($this->sparql_config['discovery_map']);
 
 			$description = $this->sparql_config['description'];
@@ -49,9 +51,19 @@ class DBPedia extends CI_Model {
 			if (isset($ret[$entity['entity']['value']])){
 				$ret[$entity['entity']['value']]['name'][] = $entity['name']['value'];
 			}else{
+				$thumb = '';
+				$abstract = '';
+				if (isset($entity['thumbnail']['value'])){
+					$thumb = $entity['thumbnail']['value'];
+				}
+				if (isset($entity['abstract']['value'])){
+					$abstract = $entity['abstract']['value'];
+				}
 				$ret[$entity['entity']['value']] = array(
 					'date' => $entity['date']['value'],
-					'name' => array($entity['name']['value'])
+					'name' => array($entity['name']['value']),
+					'thumbnail' => $thumb,
+					'abstract' => $abstract
 				);
 			}
 		}

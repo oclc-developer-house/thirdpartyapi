@@ -25,8 +25,16 @@
     <?php endif; ?>
       <div class="col-sm-12 col-md-12" style="border:1px solid #ccc; margin: 5px;">
         <div class="row">
-          <div class="col-md-2" style="margin: 10px;"><img src="http://placehold.it/150x200"></div>
-          <div class="col-md-8" style="margin: 10px;"><h3><?php echo $e->get_label(); ?></h3></div>
+          <div class="col-md-2" style="margin: 10px;">
+          <?php if ($e->get_image()): ?>
+            <img src="<?php echo $e->get_image(); ?>">
+          <?php else: ?>
+            <img src="http://placehold.it/150x200">
+          <?php endif; ?>
+          </div>
+          <div class="col-md-8" style="margin: 10px;">
+            <h3><?php echo $e->get_label(); ?></h3>
+          </div>
         </div>
         <div class="row">
           <?php foreach($holdings as $holding) { ?>

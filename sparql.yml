@@ -8,11 +8,13 @@ queries:
             - creator
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
-            SELECT DISTINCT ?entity ?date ?name
+            SELECT DISTINCT ?entity ?date ?name ?thumbnail ?abstract
             WHERE {
               ?entity ont:birthDate ?date .
               ?entity a dbpedia-owl:Writer .
-              ?entity foaf:name ?name
+              ?entity foaf:name ?name .
+              OPTIONAL {?entity dbpedia-owl:thumbnail ?thumbnail} .
+              OPTIONAL {?entity dbpedia-owl:abstract ?abstract}
               FILTER(
                 ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
                 ( str(?date) <= "%TODAY%" ) &&
@@ -75,8 +77,7 @@ queries:
                 ( regex(str(?date), "[0-9]{4}-%MONTH%-%DAY%") )&&
                 (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
               )
-            }
-
+            } 
     -   name: "Countries"
         description: "%NAME% was founded on %DATE%."
         discovery_map:
@@ -98,7 +99,6 @@ queries:
         description: "%NAME% was published on %DATE%."
         discovery_map:
             - name
-            - uniformName
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
             SELECT DISTINCT ?entity ?name ?date WHERE {
@@ -112,12 +112,10 @@ queries:
                    (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
                 )
             }
-
     -   name: "Films"
         description: "%NAME% was released to theaters on %DATE%."
         discovery_map:
             - name
-            - uniformName
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/> 
             SELECT DISTINCT ?entity ?name ?date WHERE {
