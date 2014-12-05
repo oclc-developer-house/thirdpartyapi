@@ -124,9 +124,20 @@ class Main extends CI_Controller {
 	}
 
 	protected function set_query_dates($query){
-		$today = date('Y-m-d');
-		$month = date('m');
-		$day = date('d');
+		
+		$date_param = $this->input->get('date');
+
+		if ($date_param) {
+			$date_array = explode("-", $date_param);
+			$today = $date_param;
+			$month = $date_array[1];
+			$day = $date_array[2];
+		}else {
+			$today = date('Y-m-d');
+			$month = date('m');
+			$day = date('d');
+		}
+
 
 		$query = str_replace('%TODAY%', $today, $query);
 		$query = str_replace('%MONTH%', $month, $query);
@@ -247,8 +258,12 @@ class Main extends CI_Controller {
 
 		foreach ($entities as &$entity) {
 			$rank_map = $entity->get_rank_map();
-			$rank_map['normalized_dapi_count'] = 
-				($rank_map['dapi_count'] - $count_min) / ($count_max - $count_min);
+			if ($count_max > $count_min) {
+				$rank_map['normalized_dapi_count'] = 
+					($rank_map['dapi_count'] - $count_min) / ($count_max - $count_min);
+			}else {
+				$rank_map['normalized_dapi_count'] = 0;
+			}
 			$entity->set_rank_map($rank_map);
 
 			//yell($entity);
