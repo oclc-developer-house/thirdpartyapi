@@ -6,7 +6,8 @@ use OCLC\Auth\WSKey;
 use OCLC\Auth\AccessToken;
 use WorldCat\Discovery\Bib;
 use WorldCat\Discovery\Person;
-use WorldCat\Discovery\CreatieWork;
+use WorldCat\Discovery\CreativeWork;
+use WorldCat\Discovery\Error;
 
 class Dapi {
 
@@ -22,10 +23,10 @@ class Dapi {
 	}	
 	
 
-	public function search($query = "") {
-		$response = Bib::Search($query, $this->accessToken);
+	public function search($query = "", $options = null) {
+		$response = Bib::Search($query, $this->accessToken, $options);
 
-		if (is_a($response, "WordlCat\Discovery\Error")) {
+		if (is_a($response, "WorldCat\Discovery\Error")) {
 			echo $response->getErrorCode();
 			echo $response->getErrorMessage();
 		}else {
