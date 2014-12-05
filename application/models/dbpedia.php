@@ -7,7 +7,6 @@ class DBPedia extends CI_Model {
 		parent::__construct();
 
 		$this->load->library('MY_Sparql');
-		$this->load->library("Dapi");
 		$this->load->helper('dev');
 	}
 
