@@ -61,6 +61,7 @@ queries:
                 (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
               )
             }
+            LIMIT 3
     -   name: "Musicians"
         description: "%NAME% was born on %DATE%."
         discovery_map:
@@ -78,7 +79,8 @@ queries:
                 ( regex(str(?date), "[0-9]{4}-%MONTH%-%DAY%") )&&
                 (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
               )
-            } 
+            }
+            LIMIT 3
     -   name: "Countries"
         description: "%NAME% was founded on %DATE%."
         discovery_map:
@@ -96,6 +98,7 @@ queries:
                 (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
                 )
             }
+            LIMIT 3
     -   name: "Books"
         description: "%NAME% was published on %DATE%."
         discovery_map:
@@ -113,6 +116,7 @@ queries:
                    (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
                 )
             }
+            LIMIT 3
     -   name: "Films"
         description: "%NAME% was released to theaters on %DATE%."
         discovery_map:
@@ -130,3 +134,4 @@ queries:
                    (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
                 )
             }
+            LIMIT 3
