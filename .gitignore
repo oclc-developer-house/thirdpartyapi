@@ -1,4 +1,5 @@
 datasources.html
 composer.lock
 vendor/
+components/
 .DS_Store
