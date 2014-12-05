@@ -116,7 +116,7 @@ class Main extends CI_Controller {
 				$query = $this->set_query_dates($query);
 				$query_results = $this->DBPedia->get_results($query);
 				$results = array_merge($results, $query_results);
-				break;
+				//break;
 			}
 		}
 
@@ -124,9 +124,20 @@ class Main extends CI_Controller {
 	}
 
 	protected function set_query_dates($query){
-		$today = date('Y-m-d');
-		$month = date('m');
-		$day = date('d');
+		
+		$date_param = $this->input->get('date');
+
+		if ($date_param) {
+			$date_array = explode("-", $date_param);
+			$today = $date_param;
+			$month = $date_array[1];
+			$day = $date_array[2];
+		}else {
+			$today = date('Y-m-d');
+			$month = date('m');
+			$day = date('d');
+		}
+
 
 		$query = str_replace('%TODAY%', $today, $query);
 		$query = str_replace('%MONTH%', $month, $query);
