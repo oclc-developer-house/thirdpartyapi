@@ -16,7 +16,7 @@
 
 <body>
   <div class="page-header">
-    <h1>DAPI Diem     <small>Have a DAPI day!</small></h1>
+    <h1><img src="<?php echo base_url(); ?>dapi-diem.png" alt="DAPI Diem" /><small>Have a DAPI day!</small></h1>
   </div>
   <div class="container-fluid">
     <?php foreach ($entities as $e): ?>
