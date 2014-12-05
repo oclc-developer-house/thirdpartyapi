@@ -20,7 +20,7 @@ queries:
                 (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
               )
             }
-            LIMIT 5
+            LIMIT 3
     -   name: "Athletes"
         description: "%NAME% was born on %DATE%."
         discovery_map:
@@ -40,94 +40,4 @@ queries:
                 (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
               )
             }
-    -   name: "Politicians"
-        description: "%NAME% was born on %DATE%."
-        discovery_map:
-            - name
-            - creator
-        query: |
-            PREFIX ont: <http://dbpedia.org/ontology/>
-            SELECT DISTINCT ?entity ?name ?date  WHERE {
-              ?entity ont:birthDate ?date .
-              ?entity a dbpedia-owl:Politician .
-              ?entity foaf:name ?name
-              FILTER(
-                ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
-                ( str(?date) <= "%TODAY%" ) &&
-                ( regex(str(?date), "[0-9]{4}-%MONTH%-%DAY%") )&&
-                (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
-              )
-            }
-    -   name: "Musicians"
-        description: "%NAME% was born on %DATE%."
-        discovery_map:
-            - name
-            - creator
-        query: |
-            PREFIX ont: <http://dbpedia.org/ontology/>
-            SELECT DISTINCT ?entity ?name ?date  WHERE {
-              ?entity ont:birthDate ?date .
-              ?entity a dbpedia-owl:MusicalArtist .
-              ?entity foaf:name ?name
-              FILTER(
-                ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
-                ( str(?date) <= "%TODAY%" ) &&
-                ( regex(str(?date), "[0-9]{4}-%MONTH%-%DAY%") )&&
-                (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
-              )
-            }
-
-    -   name: "Countries"
-        description: "%NAME% was founded on %DATE%."
-        discovery_map:
-            - name
-        query: |
-            SELECT ?entity ?name ?date WHERE {
-                ?entity a dbpedia-owl:Country.
-                ?entity a yago:Country108544813.
-                ?entity dbpedia-owl:foundingDate ?date.
-                ?entity foaf:name ?name
-                FILTER(
-                    ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
-                ( str(?date) <= "%TODAY%" ) &&
-                ( regex(str(?date), "[0-9]{4}-%MONTH%-%DAY%") )&&
-                (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
-                )
-            }
-    -   name: "Books"
-        description: "%NAME% was published on %DATE%."
-        discovery_map:
-            - name
-            - uniformName
-        query: |
-            PREFIX ont: <http://dbpedia.org/ontology/>
-            SELECT DISTINCT ?entity ?name ?date WHERE {
-                ?entity a ont:Book;
-                      ont:publicationDate ?date;
-                      foaf:name ?name .
-                FILTER(
-                   ((datatype(?date) = xsd:date) || (datatype(?date) = xsd:dateTime)) &&
-                   (str(?date) <= "%TODAY%") &&
-                   (regex(str(?date), "[0-9]{4}-%MONTH%-%DAY%")) &&
-                   (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
-                )
-            }
-
-    -   name: "Films"
-        description: "%NAME% was released to theaters on %DATE%."
-        discovery_map:
-            - name
-            - uniformName
-        query: |
-            PREFIX ont: <http://dbpedia.org/ontology/> 
-            SELECT DISTINCT ?entity ?name ?date WHERE {
-                ?entity a ont:Film;
-                      ont:releaseDate ?date;
-                      foaf:name ?name .
-                FILTER( 
-                   ((datatype(?date) = xsd:date) || (datatype(?date) = xsd:dateTime)) &&
-                   (str(?date) <= "%TODAY%") && 
-                   (regex(str(?date), "[0-9]{4}-%MONTH%-%DAY%")) && 
-                   (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
-                )
-            }
+            LIMIT 3
