@@ -116,7 +116,7 @@ class Main extends CI_Controller {
 				$query = $this->set_query_dates($query);
 				$query_results = $this->DBPedia->get_results($query);
 				$results = array_merge($results, $query_results);
-				//break;
+				break;
 			}
 		}
 
@@ -258,8 +258,12 @@ class Main extends CI_Controller {
 
 		foreach ($entities as &$entity) {
 			$rank_map = $entity->get_rank_map();
-			$rank_map['normalized_dapi_count'] = 
-				($rank_map['dapi_count'] - $count_min) / ($count_max - $count_min);
+			if ($count_max > $count_min) {
+				$rank_map['normalized_dapi_count'] = 
+					($rank_map['dapi_count'] - $count_min) / ($count_max - $count_min);
+			}else {
+				$rank_map['normalized_dapi_count'] = 0;
+			}
 			$entity->set_rank_map($rank_map);
 
 			//yell($entity);
