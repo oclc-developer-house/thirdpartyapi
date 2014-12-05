@@ -20,4 +20,6 @@ Use the [Jena SPARQL Tutorial](http://jena.apache.org/tutorials/sparql.html) to 
 
 Use the examples in the repository as examples of how to interrogate your data source. When completed review the examples in the repositories YAML file (all of which are getting information about a specific date)
 
+The application needs [PHP Composer](https://getcomposer.org/) to run
+
 Check YAML with YAML Lint to verify code
