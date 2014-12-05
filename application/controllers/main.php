@@ -77,6 +77,11 @@ class Main extends CI_Controller {
 
 	protected function sort_by_rank($entities) {
 
+		//first, remove all entities that don't have holdings
+		array_filter($entities, function($entity) {
+				return $entity->get_holdings() && count($entity->get_holdings());
+			});
+
 		foreach($entities as $entity) {
 			$rank_map = $entity->get_rank_map();
 
