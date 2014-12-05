@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 include_once APPPATH . 'models/entity.php';
+include_once APPPATH . 'libraries/Dapi.php';
 
 class Main extends CI_Controller {
 
@@ -40,6 +41,23 @@ class Main extends CI_Controller {
 		$this->load->view('main', array('data' => $data));
 	}
 
+	public function json() {
+	
+		$this->output->set_content_type("application/json");
+		echo json_encode($this->get_data());
+		
+	}
+
+	public function raw() {
+		$data = $this->get_data();
+		echo gettype($data[0]) . "<br/>";
+		yell($data);
+	}
+
+
+	//////////////////////////////////////////////
+
+	
 	protected function get_data() {
 		// step 1 : get dbpedia results
 		$dbpedia_results = $this->get_dbpedia_results();
@@ -85,20 +103,6 @@ class Main extends CI_Controller {
 		$query = str_replace('%DAY%', $day, $query);
 
 		return $query;
-	}
-
-
-	public function json() {
-	
-		$this->output->set_content_type("application/json");
-		echo json_encode($this->get_data());
-		
-	}
-
-	public function raw() {
-		$data = $this->get_data();
-		echo gettype($data[0]) . "<br/>";
-		yell($data);
 	}
 
 	protected function get_wikipedia_data($dbpedia_results){
