@@ -37,7 +37,7 @@ class Main extends CI_Controller {
 	{
 
 		$data = $this->get_data();
-
+		header('Content-Type: text/html; charset=utf-8');
 		$this->load->view('entities', array('entities' => $data));
 	}
 
