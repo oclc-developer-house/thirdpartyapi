@@ -50,14 +50,12 @@ class Main extends CI_Controller {
 
 	public function raw() {
 		$data = $this->get_data();
-		echo gettype($data[0]) . "<br/>";
 		yell($data);
 	}
 
-
 	//////////////////////////////////////////////
 
-	
+
 	protected function get_data() {
 		// step 1 : get dbpedia results
 		$dbpedia_results = $this->get_dbpedia_results();
@@ -181,6 +179,8 @@ class Main extends CI_Controller {
 
 			// add holdings
 			foreach($dapi_results as $dapi_result) {
+				//yell($dapi_result->getAuthor());
+				//yell($dapi_result);
 				//yell($dapi_result->getName()->getValue());
 				//yell($dapi_result->getAuthor()->getValue());
 				$entity->add_holding(array('name' => $dapi_result->getName()->getValue()));
@@ -207,13 +207,6 @@ class Main extends CI_Controller {
 		}
 
 		return $entities;
-	}
-
-	public function test_data() {
-		$this->output->set_content_type("application/json");
-
-		$this->load->helper('file');
-		echo read_file(FCPATH . "testdbpedia.json");
 	}
 }
 
