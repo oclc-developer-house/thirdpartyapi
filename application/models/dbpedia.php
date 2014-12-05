@@ -47,24 +47,26 @@ class DBPedia extends CI_Model {
 		$ret = array();
 		$results = json_decode($sparql_results, true);
 		$entities = $results['results']['bindings'];
-		foreach ($entities as $entity){
-			if (isset($ret[$entity['entity']['value']])){
-				$ret[$entity['entity']['value']]['name'][] = $entity['name']['value'];
-			}else{
-				$thumb = '';
-				$abstract = '';
-				if (isset($entity['thumbnail']['value'])){
-					$thumb = $entity['thumbnail']['value'];
+		if ($entities) {
+			foreach ($entities as $entity){
+				if (isset($ret[$entity['entity']['value']])){
+					$ret[$entity['entity']['value']]['name'][] = $entity['name']['value'];
+				}else{
+					$thumb = '';
+					$abstract = '';
+					if (isset($entity['thumbnail']['value'])){
+						$thumb = $entity['thumbnail']['value'];
+					}
+					if (isset($entity['abstract']['value'])){
+						$abstract = $entity['abstract']['value'];
+					}
+					$ret[$entity['entity']['value']] = array(
+						'date' => $entity['date']['value'],
+						'name' => array($entity['name']['value']),
+						'thumbnail' => $thumb,
+						'abstract' => $abstract
+					);
 				}
-				if (isset($entity['abstract']['value'])){
-					$abstract = $entity['abstract']['value'];
-				}
-				$ret[$entity['entity']['value']] = array(
-					'date' => $entity['date']['value'],
-					'name' => array($entity['name']['value']),
-					'thumbnail' => $thumb,
-					'abstract' => $abstract
-				);
 			}
 		}
 		return $ret;

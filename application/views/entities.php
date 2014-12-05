@@ -20,7 +20,7 @@
   </div>
   <div class="container-fluid">
     <?php foreach ($entities as $e): ?>
-    <?php $holdings=$ e->get_holdings(); ?>
+    <?php $holdings=$e->get_holdings(); ?>
     <?php $count=1 ; ?>
     <?php if ($count % 2 !=0 ): ?>
     <div class="row">
