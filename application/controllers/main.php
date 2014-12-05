@@ -69,6 +69,37 @@ class Main extends CI_Controller {
 		// step 4 : get dapi results for each entity
 		$entities = $this->get_dapi_data($entities);
 
+		// sort by rank
+		$entities = $this->sort_by_rank($entities);
+
+		return $entities;
+	}
+
+	protected function sort_by_rank($entities) {
+
+		foreach($entities as $entity) {
+			$rank_map = $entity->get_rank_map();
+
+			$weight_a = 1;
+			$weight_b = 10;
+			$weight_c = 1;
+			$weight_d = 10;
+
+			$rank = $rank_map['normalized_revision_count'] * $weight_a +
+						$rank_map['normalized_article_length'] * $weight_b +
+						$rank_map['normalized_num_external_links'] * $weight_c +
+						$rank_map['normalized_dapi_count'] * $weight_d;
+
+			$entity->set_rank($rank);
+		}
+
+		usort($entities, function($a, $b) {
+				if ($a->get_rank() == $b->get_rank()) {
+			    	return 0;
+			    }
+				return ($a->get_rank() < $b->get_rank()) ? 1 : -1;
+			});
+
 		return $entities;
 	}
 
@@ -182,6 +213,8 @@ class Main extends CI_Controller {
 
 			if ($dapi_response) {
 				$dapi_results = $dapi_response->getSearchResults();
+				// reduce to 5 elements
+				$dapi_results = array_slice($dapi_results, 0, 5);
 
 				$dapi_total_count = $dapi_response->getTotalResults();
 				$result_count[] = $dapi_total_count;
