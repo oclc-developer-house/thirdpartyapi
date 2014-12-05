@@ -16,6 +16,8 @@
 		"easyrdf/easyrdf": "0.9.0",
 		"ml/json-ld": "1.0.3",
 		"worldcat/discovery" : ">=0.7",
-		"guzzlehttp/guzzle": "5.0"
+		"guzzlehttp/guzzle": "5.0",
+		"components/jquery": "2.1.1",
+		"components/bootstrap": "3.3.1"
 	}
 }
