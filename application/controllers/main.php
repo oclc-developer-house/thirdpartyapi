@@ -179,23 +179,6 @@ class Main extends CI_Controller {
 
 			//yell($dapi_query);
 			$dapi_response = $dapi->search($dapi_query);
-<<<<<<< Updated upstream
-			$dapi_results = $dapi_response->getSearchResults();
-			//print_r($dapi_results);
-
-			$dapi_total_count = $dapi_response->getTotalResults();
-			$result_count[] = $dapi_total_count;
-
-			// add holdings
-			foreach($dapi_results as $dapi_result) {
-				//yell($dapi_result->getAuthor());
-				//yell($dapi_result);
-				//yell($dapi_result->getName()->getValue());
-				//yell($dapi_result->getAuthor()->getValue());
-				$entity->add_holding(array('name' => $dapi_result->getName()->getValue()));
-			}
-=======
->>>>>>> Stashed changes
 
 			if ($dapi_response) {
 				$dapi_results = $dapi_response->getSearchResults();
