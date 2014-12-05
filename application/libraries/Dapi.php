@@ -27,8 +27,8 @@ class Dapi {
 		$response = Bib::Search($query, $this->accessToken, $options);
 
 		if (is_a($response, "WorldCat\Discovery\Error")) {
-			echo $response->getErrorCode();
-			echo $response->getErrorMessage();
+			//echo $response->getErrorCode();
+			//echo $response->getErrorMessage();
 		}else {
 			//yell($results);
 			return $response;
