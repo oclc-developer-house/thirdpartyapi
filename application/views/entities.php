@@ -23,21 +23,23 @@
     <?php if ($count % 2 != 0): ?>
     <div class="row">
     <?php endif; ?>
-      <div class="col-sm-6 col-md-6">
-        <div>
-          <img data-src="holder.js/300x300" alt="...">
-          <h3><?php echo $e->get_label(); ?></h3>
+      <div class="col-sm-12 col-md-12" style="border:1px solid #ccc; margin: 5px;">
+        <div class="row">
+          <div class="col-md-2" style="margin: 10px;"><img src="http://placehold.it/150x200"></div>
+          <div class="col-md-8" style="margin: 10px;"><h3><?php echo $e->get_label(); ?></h3></div>
         </div>
         <div class="row">
-          <div class="col-sm-4 col-md-4">
-            <?php echo $holdings[0]['name']; ?>
+          <?php foreach($holdings as $holding) { ?>
+          <div class="col-sm-2 col-md-2">
+            <div class="thumbnail">
+              <img src="http://placehold.it/80x100">
+              <div class="caption">
+                <h3><?php echo $holding['name']; ?></h3>
+                <div><?php echo $holding['author']; ?></div>
+              </div>
+            </div>
           </div>
-          <div class="col-sm-4 col-md-4">
-            <?php echo $holdings[1]['name']; ?>
-          </div>
-          <div class="col-sm-4 col-md-4">
-            <?php echo $holdings[2]['name']; ?>
-          </div>
+          <?php } ?>
         </div>
       </div>
 
