@@ -98,16 +98,20 @@ queries:
         discovery_map:
             - name
         query: |
-            SELECT ?entity ?name ?date WHERE {
+            SELECT ?entity ?name ?date ?thumbnail ?abstract
+             WHERE {
                 ?entity a dbpedia-owl:Country.
                 ?entity a yago:Country108544813.
                 ?entity dbpedia-owl:foundingDate ?date.
-                ?entity foaf:name ?name
+                ?entity foaf:name ?name .
+                OPTIONAL {?entity dbpedia-owl:thumbnail ?thumbnail} .
+                OPTIONAL {?entity dbpedia-owl:abstract ?abstract}
                 FILTER(
                     ( ( datatype(?date) = xsd:date ) || ( datatype(?date) = xsd:dateTime ) ) &&
                 ( str(?date) <= "%TODAY%" ) &&
                 ( regex(str(?date), "[0-9]{4}-%MONTH%-%DAY%") )&&
-                (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
+                (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en")) &&
+                (LANG(?abstract) = "" || LANGMATCHES(LANG(?abstract), "en"))
                 )
             }
             LIMIT 3
@@ -117,15 +121,19 @@ queries:
             - name
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/>
-            SELECT DISTINCT ?entity ?name ?date WHERE {
+            SELECT DISTINCT ?entity ?name ?date ?thumbnail ?abstract
+             WHERE {
                 ?entity a ont:Book;
                       ont:publicationDate ?date;
                       foaf:name ?name .
+                OPTIONAL {?entity dbpedia-owl:thumbnail ?thumbnail} .
+                OPTIONAL {?entity dbpedia-owl:abstract ?abstract}
                 FILTER(
                    ((datatype(?date) = xsd:date) || (datatype(?date) = xsd:dateTime)) &&
                    (str(?date) <= "%TODAY%") &&
                    (regex(str(?date), "[0-9]{4}-%MONTH%-%DAY%")) &&
-                   (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
+                   (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en")) &&
+                   (LANG(?abstract) = "" || LANGMATCHES(LANG(?abstract), "en"))
                 )
             }
             LIMIT 3
@@ -135,15 +143,19 @@ queries:
             - name
         query: |
             PREFIX ont: <http://dbpedia.org/ontology/> 
-            SELECT DISTINCT ?entity ?name ?date WHERE {
+            SELECT DISTINCT ?entity ?name ?date ?thumbnail ?abstract
+             WHERE {
                 ?entity a ont:Film;
                       ont:releaseDate ?date;
                       foaf:name ?name .
+                OPTIONAL {?entity dbpedia-owl:thumbnail ?thumbnail} .
+                OPTIONAL {?entity dbpedia-owl:abstract ?abstract}
                 FILTER( 
                    ((datatype(?date) = xsd:date) || (datatype(?date) = xsd:dateTime)) &&
                    (str(?date) <= "%TODAY%") && 
                    (regex(str(?date), "[0-9]{4}-%MONTH%-%DAY%")) && 
-                   (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en"))
+                   (LANG(?name) = "" || LANGMATCHES(LANG(?name), "en")) &&
+                   (LANG(?abstract) = "" || LANGMATCHES(LANG(?abstract), "en"))
                 )
             }
             LIMIT 3
