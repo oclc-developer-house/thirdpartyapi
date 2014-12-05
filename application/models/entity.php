@@ -68,9 +68,12 @@ class Entity implements \JsonSerializable {
 		$this->rank_map = $map;
 	}
 
-	public function get_computed_rank() {
-		// compute from the rank_map
-		return 0;
+	public function get_rank() {
+		return $this->rank;
+	}
+
+	public function set_rank($rank = 0) {
+		$this->rank = $rank;
 	}
 
 	public function get_holdings() {
