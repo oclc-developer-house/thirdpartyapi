@@ -8,6 +8,8 @@
 		<link rel="stylesheet" href="<?php echo base_url(); ?>components/bootstrap/css/bootstrap.min.css">
 		<!-- Optional theme -->
 		<link rel="stylesheet" href="<?php echo base_url(); ?>components/bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>application/views/custom.css">
+
 		<!--responsive design-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
@@ -27,13 +29,16 @@
         <div class="row">
           <div class="col-md-2" style="margin: 10px;">
           <?php if ($e->get_image()): ?>
-            <img src="<?php echo $e->get_image(); ?>">
+            <img src="<?php echo $e->get_image(); ?>" style="max-width: 100%" />
           <?php else: ?>
             <img src="http://placehold.it/150x200">
           <?php endif; ?>
           </div>
           <div class="col-md-8" style="margin: 10px;">
             <h3><?php echo $e->get_label(); ?></h3>
+            <?php if ($e->get_description()): ?>
+              <p><?php echo $e->get_description(); ?></p>
+            <?php endif; ?>            
           </div>
         </div>
         <div class="row">
