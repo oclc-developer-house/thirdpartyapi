@@ -32,7 +32,8 @@ class DBPedia extends CI_Model {
 
 			$description = $this->sparql_config['description'];
 			$description = str_replace('%NAME%', $props['name'][0], $description);
-			$description = str_replace('%DATE%', date('F j, Y', strtotime($props['date'])), $description);
+			$date = date('F j, Y', strtotime(substr($props['date'], 0, 10)));
+			$description = str_replace('%DATE%', $date, $description);
 			$entity->set_label($description);
 			$entities[] = $entity;
 		}
