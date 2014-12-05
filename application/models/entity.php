@@ -1,7 +1,7 @@
 <?php
 
 
-class Entity {
+class Entity implements \JsonSerializable {
 	protected $id;
 	protected $terms; // DAPI search terms
 	protected $label;
@@ -87,6 +87,10 @@ class Entity {
 
 	public function get_num_holdings() {
 		return count($this->holdings);
+	}
+
+	public function JsonSerialize() {
+		return get_object_vars($this);
 	}
 
 }
