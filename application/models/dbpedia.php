@@ -18,9 +18,9 @@ class DBPedia extends CI_Model {
 		$sparql = new MY_Sparql();
 
 		// get sparql data
-		//$sparql_results = $sparql->query($query);
+		$sparql_results = $sparql->query($query);
 		// test data
-		$sparql_results = file_get_contents(FCPATH . "testdbpedia.json");
+		//$sparql_results = file_get_contents(FCPATH . "testdbpedia.json");
 
 		$dedup_results = $this->dedup_results($sparql_results);
 		$entities = array();
