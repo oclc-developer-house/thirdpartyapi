@@ -263,7 +263,7 @@ class Main extends CI_Controller {
 
 		foreach ($entities as &$entity) {
 			$rank_map = $entity->get_rank_map();
-			if ($count_max > $count_min) {
+			if ($count_max > $count_min && array_key_exists('dapi_count', $rank_map)) {
 				$rank_map['normalized_dapi_count'] = 
 					($rank_map['dapi_count'] - $count_min) / ($count_max - $count_min);
 			}else {
