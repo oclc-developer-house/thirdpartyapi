@@ -38,7 +38,7 @@ class Main extends CI_Controller {
 
 		$data = $this->get_data();
 
-		$this->load->view('main', array('data' => $data));
+		$this->load->view('entities', array('entities' => $data));
 	}
 
 	public function json() {

@@ -23,20 +23,18 @@
     <div class="row-fluid">
     <?php endif; ?>
       <div class="col-sm-6 col-md-6">
-        <div class="thumbnail">
+        <div>
           <img data-src="holder.js/300x300" alt="...">
-          <div class="caption">
-            <h3><?php echo $e->get_label(); ?></h3>
-          </div>
+          <h3><?php echo $e->get_label(); ?></h3>
         </div>
-        <div class="col-sm-2 col-md-2">
-          <?php echo $holdings[0]; ?>
+        <div class="col-sm-4 col-md-4">
+          <?php echo $holdings[0]['name']; ?>
         </div>
-        <div class="col-sm-2 col-md-2">
-          <?php echo $holdings[1]; ?>
+        <div class="col-sm-4 col-md-4">
+          <?php echo $holdings[1]['name']; ?>
         </div>
-        <div class="col-sm-2 col-md-2">
-          <?php echo $holdings[2]; ?>
+        <div class="col-sm-4 col-md-4">
+          <?php echo $holdings[2]['name']; ?>
         </div>
       </div>
 
