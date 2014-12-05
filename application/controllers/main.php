@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 include_once APPPATH . 'models/entity.php';
+include_once APPPATH . 'libraries/Dapi.php';
 
 class Main extends CI_Controller {
 
@@ -34,7 +35,43 @@ class Main extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('main');
+
+		$data = $this->get_data();
+
+		$this->load->view('main', array('data' => $data));
+	}
+
+	public function json() {
+	
+		$this->output->set_content_type("application/json");
+		echo json_encode($this->get_data());
+		
+	}
+
+	public function raw() {
+		$data = $this->get_data();
+		echo gettype($data[0]) . "<br/>";
+		yell($data);
+	}
+
+
+	//////////////////////////////////////////////
+
+	
+	protected function get_data() {
+		// step 1 : get dbpedia results
+		$dbpedia_results = $this->get_dbpedia_results();
+
+
+		// step 2 : get wiki counts for each 
+		$entities = $this->get_wikipedia_data($dbpedia_results);
+
+		// step 3 : normalize counts for each entity
+
+		// step 4 : get dapi results for each entity
+		$entities = $this->get_dapi_data($entities);
+
+		return $entities;
 	}
 
 	protected function get_dbpedia_results() {
@@ -66,25 +103,6 @@ class Main extends CI_Controller {
 		$query = str_replace('%DAY%', $day, $query);
 
 		return $query;
-	}
-
-	public function json() {
-	
-		//$this->output->set_content_type("application/json");
-		// step 1 : get dbpedia results
-		$dbpedia_results = $this->get_dbpedia_results();
-
-
-		// step 2 : get wiki counts for each 
-		$entities = $this->get_wikipedia_data($dbpedia_results);
-
-		// step 3 : normalize counts for each entity
-
-		// step 4 : get dapi results for each entity
-		$entities = $this->get_dapi_data($entities);
-
-		//$dapi_results = $dapi->search("name:john+smith+or+name:smith+john");
-		
 	}
 
 	protected function get_wikipedia_data($dbpedia_results){
@@ -140,6 +158,7 @@ class Main extends CI_Controller {
 
 		$result_count = array();
 
+
 		foreach($entities as &$entity) {
 			//yell($entity);
 
@@ -160,24 +179,23 @@ class Main extends CI_Controller {
 			$dapi_total_count = $dapi_response->getTotalResults();
 			$result_count[] = $dapi_total_count;
 
-			/*foreach($dapi_results as $dapi_result) {
-				yell($dapi_result->getName()->getValue());
-				yell($dapi_result->getAuthor()->getValue());
-			}*/
-
+			// add holdings
+			foreach($dapi_results as $dapi_result) {
+				//yell($dapi_result->getName()->getValue());
+				//yell($dapi_result->getAuthor()->getValue());
+				$entity->add_holding(array('name' => $dapi_result->getName()->getValue()));
+			}
 
 			$rank_map = $entity->get_rank_map();
 			$rank_map['dapi_count'] = $dapi_total_count;
 			$entity->set_rank_map($rank_map);
-
-			// set holdings
 
 			//yell($entity);
 		}
 
 		// now, enter normalized count values into each entity
 		$count_max = max($result_count);
-		$count_min = min($result_count);		
+		$count_min = min($result_count);
 
 		foreach ($entities as &$entity) {
 			$rank_map = $entity->get_rank_map();
@@ -185,9 +203,7 @@ class Main extends CI_Controller {
 				($rank_map['dapi_count'] - $count_min) / ($count_max - $count_min);
 			$entity->set_rank_map($rank_map);
 
-			yell($entity);
-
-
+			//yell($entity);
 		}
 
 		return $entities;
