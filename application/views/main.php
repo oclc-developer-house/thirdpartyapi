@@ -4,16 +4,15 @@
 
 		<title>DAPI Diem</title>
 		<div class="page-header">
-  <h1>DAPI Diem     <small>Have a DAPI day!</small></h1>
+  <h1 align="center"><B>DAPI Diem</B>     <small>Have a DAPI day!</small></h1>
 </div>
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
 		<!-- Optional theme -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-		<!--responsive design-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+		<!-- Custom DAPI CSS -->
+		<link rel="stylesheet" href="custom.css">
 	</head>
 
 	<body>

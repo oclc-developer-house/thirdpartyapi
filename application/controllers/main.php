@@ -78,6 +78,7 @@ class Main extends CI_Controller {
 		$results = array();
 
 		if ($sparql['queries']) {
+			$count = 0;
 			foreach($sparql['queries'] as $query_obj) {
 				$this->DBPedia->initialize($query_obj);
 				$query = $query_obj['query'];
@@ -117,37 +118,42 @@ class Main extends CI_Controller {
 			$wikipedia_results['revision_count'] = $this->Wikipedia->get_revision_count();
 			$wikipedia_results['article_length'] = $this->Wikipedia->get_article_length();
 			$wikipedia_results['num_external_links'] = $this->Wikipedia->get_num_external_links();
-      		$entity->set_rank_map($wikipedia_results);
+      $entity->set_rank_map($wikipedia_results);
 			$entities[] = $entity;
 
 			$revisions[] = $wikipedia_results['revision_count'];
 			$lengths[] = $wikipedia_results['article_length'];
 			$links[] = $wikipedia_results['num_external_links'];
-    	}
+    }
     
-	    $revisions_min = min($revisions);
-	    $revisions_max = max($revisions);
-	    
-	    $length_min = min($lengths);
-	    $length_max = max($lengths);
-	    
-	    $links_min = min($links);
-	    $links_max = max($links); 
+    $revisions_denom = max($revisions) - min($revisions);
+    $length_denom = max($lengths) - min($lengths);
+    $links_denom = max($links) - min($links);
 
-	    $full_entities = array();
-	    foreach ($entities as $e){
-	    	$rank_map = $e->get_rank_map();
-	    	$rank_map['normalized_revision_count'] = 
-	    		($rank_map['revision_count'] - $revisions_min) / ($revisions_max - $revisions_min);
-	    	$rank_map['normalized_article_length'] = 
-	    		($rank_map['article_length'] - $length_min) / ($length_max - $length_min);
-	    	$rank_map['normalized_num_external_links'] = 
-	    		($rank_map['num_external_links'] - $links_min) / ($links_max - $links_min);
-	    	$e->set_rank_map($rank_map);
-	    	$full_entities[] = $e;
-	    }
+    $full_entities = array();
+    foreach ($entities as $e){
+    	$rank_map = $e->get_rank_map();
+    	$rank_map['normalized_revision_count'] = 0;
+    	$rank_map['normalized_article_length'] = 0;
+    	$rank_map['normalized_num_external_links'] = 0;
 
-	    return $entities;
+    	if ($revisions_denom > 0){
+    		$rank_map['normalized_revision_count'] = 
+    			($rank_map['revision_count'] - min($revisions)) / $revisions_denom;
+    	}
+    	if ($revisions_denom > 0){
+    		$rank_map['normalized_article_length'] = 
+    			($rank_map['article_length'] - min($lengths)) / $length_denom;
+    	}
+    	if ($links_denom){
+    		$rank_map['normalized_num_external_links'] = 
+    			($rank_map['num_external_links'] - min($links)) / $links_denom;
+    	}
+    	$e->set_rank_map($rank_map);
+    	$full_entities[] = $e;
+    }
+
+    return $entities;
 	}
 
 	protected function get_dapi_data(&$entities) {
@@ -173,6 +179,7 @@ class Main extends CI_Controller {
 			//yell($dapi_query);
 			$dapi_response = $dapi->search($dapi_query);
 			$dapi_results = $dapi_response->getSearchResults();
+			//print_r($dapi_results);
 
 			$dapi_total_count = $dapi_response->getTotalResults();
 			$result_count[] = $dapi_total_count;
