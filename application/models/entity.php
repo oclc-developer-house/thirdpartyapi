@@ -5,6 +5,7 @@ class Entity implements \JsonSerializable {
 	protected $id;
 	protected $terms; // DAPI search terms
 	protected $label;
+	protected $description;
 	protected $image;
 	protected $rank;
 	protected $rank_map; // key value for ranking components
@@ -14,7 +15,7 @@ class Entity implements \JsonSerializable {
 	public function __construct() {
 		$this->terms = array();
 		$this->label = "Test Label";
-		$this->image = "image uri";
+		$this->image = "";
 		$this->rank_map = array();
 		$this->dapi_map = array();
 		$this->holdings = array();
@@ -26,6 +27,14 @@ class Entity implements \JsonSerializable {
 
 	public function set_label($label = "") {
 		$this->label = $label;
+	}
+
+	public function get_description() {
+		return $this->description;
+	}
+
+	public function set_description($description = "") {
+		$this->description = $description;
 	}
 
 	public function get_id() {
